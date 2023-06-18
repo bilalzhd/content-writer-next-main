@@ -1,10 +1,12 @@
 'use client'
 import { db } from "@/firebase";
-import { PaperAirplaneIcon } from "@heroicons/react/24/solid"
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { useSession } from "next-auth/react";
 import { useState, FormEvent } from "react";
 import { toast } from "react-hot-toast";
+import useSWR from 'swr';
+import ModelSelection from "./ModelSelection";
+import { PaperAirplaneIcon } from "@heroicons/react/24/solid"
 
 type Props = {
   chatId: string
@@ -12,10 +14,11 @@ type Props = {
 function ChatInput({ chatId }: Props) {
   const [prompt, setPrompt] = useState("");
   const { data: session } = useSession();
-  
-  // TODO: use swr to get model
-  const model = "text-davinci-003";
 
+  const {data: model} = useSWR("model", {
+    fallbackData: "text-davinci-003"
+  })
+  
   const sendMessage = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!prompt) return;
@@ -68,8 +71,8 @@ function ChatInput({ chatId }: Props) {
           <PaperAirplaneIcon className="h-4 w-4 -rotate-45" />
         </button>
       </form>
-      <div>
-        {/* MODEL SELECTION */}
+      <div className="md:hidden">
+        <ModelSelection />
       </div>
     </div>
   )

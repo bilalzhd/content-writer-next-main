@@ -23,11 +23,12 @@ export default function Sidebar() {
                     <div className="hidden sm:inline">
                         <ModelSelection />
                     </div>
-
-                    {chats?.docs.map(chat => (
-                        <ChatRow key={chat.id} id={chat.id} />
-                    ))}
-                    {loading && <Loader />}
+                    <div className="flex flex-col space-y-2 my-2 ">
+                        {chats?.docs.map(chat => (
+                            <ChatRow key={chat.id} id={chat.id} />
+                        ))}
+                        {loading && <Loader />}
+                    </div>
                 </div>
             </div>
             {session && (
