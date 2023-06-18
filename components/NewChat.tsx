@@ -1,13 +1,14 @@
 'use client'
 import { db } from "@/firebase";
-import { PlusIcon } from "@heroicons/react/24/solid";
+import { ArrowLeftOnRectangleIcon, PlusIcon } from "@heroicons/react/24/outline";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function NewChat() {
     const router = useRouter();
-    const {data: session} = useSession();
+    const { data: session } = useSession();
 
     const createNewChat = async () => {
         const doc = await addDoc(collection(db, 'users', session?.user?.email!, 'chats'), {
@@ -16,10 +17,11 @@ export default function NewChat() {
         })
         router.push(`/chat/${doc.id}`)
     }
+    
     return (
-        <div onClick={createNewChat} className="flex border-gray-700 border chatRow">
-            <PlusIcon className="w-4 h-4" />
-            <p>New Chat</p>
-        </div>
+            <div onClick={createNewChat} className="flex flex-1 border-gray-700 border chatRow">
+                <PlusIcon className="w-4 h-4" />
+                <p>New Chat</p>
+            </div>
     )
 }

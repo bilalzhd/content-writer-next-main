@@ -7,6 +7,7 @@ import { Inter } from 'next/font/google'
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 import Login from '@/components/Login';
 import ClientProvider from '@/components/ClientProvider';
+import Nav from '@/components/Nav';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -28,15 +29,15 @@ export default async function RootLayout({
           {!session ? (
             <Login />
           ) : (
-              <div className = 'flex'>
-                <div className = 'bg-[#202123] max-w-[260px] h-screen overflow-y-auto md:min-w-[20rem]'>
-                  <Sidebar />
+            <div className='flex'>
+              <div className='bg-[#202123] max-w-[260px] h-screen overflow-y-auto md:min-w-[20rem]'>
+                <Sidebar />
               </div>
               <ClientProvider />
               <div className='bg-[#343541] flex-1'>{children}</div>
             </div>
-        )}
-    </SessionProvider>
+          )}
+        </SessionProvider>
       </body >
     </html >
   )

@@ -1,3 +1,4 @@
+// import MainApp from '@/components/MainApp';
 import { SunIcon } from '@heroicons/react/24/outline';
 export default function HomePage() {
   return (
@@ -15,8 +16,6 @@ export default function HomePage() {
             <p className="infoText">Write me a story about a cat and a mouse.</p>
           </div>
         </div>
-
-
       </div>
     </div>
   )
