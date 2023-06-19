@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import query from "@/lib/queryApi";
+import query, { newQuery } from "@/lib/queryApi";
 import admin from 'firebase-admin';
 import adminDb from "@/firebaseAdmin";
 
@@ -19,9 +19,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
         return;
     }
     // ChatGPT Query
-    const response = await query(prompt, model);
-    const message: Message = {
-        text: response || "Content Writer could not write content for that",
+    const response = await newQuery(prompt, model);
+    const message: ServerMessage = {
+        tokensUsed: response?.tokensUsed!,
+        text: response?.text || "Content Writer could not write content for that",
         createdAt: admin.firestore.Timestamp.now(),
         user: {
             _id: 'Content Writer',
@@ -30,13 +31,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
         }
     };
 
-    await adminDb.collection("users")
-    .doc(session?.user?.email)
-    .collection("chats")
-    .doc(chatId)
-    .collection("messages")
-    .add(message)
+    const userRef = adminDb.collection("users").doc(session?.user?.email);
+    const tokensUsedDoc = await userRef.collection("tokensUsed").doc("total").get();
+    let currentTokensUsed = 0;
+    if (tokensUsedDoc.exists) {
+        const data = tokensUsedDoc.data();
+        currentTokensUsed = data?.tokensUsed || 0;
+    }
+    const newTokensUsed = currentTokensUsed + message.tokensUsed;
+    await userRef.collection("tokensUsed").doc("total").set({ tokensUsed: newTokensUsed })
+    await adminDb.collection("users").doc(session?.user?.email).collection("chats").doc(chatId).collection("messages").add(message)
 
-    res.status(200).json({ answer: message.text })
+    res.status(200).json({answer: message.text})
 }
 

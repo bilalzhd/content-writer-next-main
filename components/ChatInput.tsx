@@ -15,16 +15,16 @@ function ChatInput({ chatId }: Props) {
   const [prompt, setPrompt] = useState("");
   const { data: session } = useSession();
 
-  const {data: model} = useSWR("model", {
+  const { data: model } = useSWR("model", {
     fallbackData: "text-davinci-003"
   })
-  
+
   const sendMessage = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!prompt) return;
     const input = prompt.trim();
     setPrompt("");
-    const message: Message = {
+    const message: UserMessage = {
       text: input,
       createdAt: serverTimestamp(),
       user: {
@@ -37,23 +37,27 @@ function ChatInput({ chatId }: Props) {
 
     // Toast Notification to say loading
     const notification = toast.loading("Content Writer is writing...");
-    
 
-    await fetch('/api/completions', {
-      method: "POST",
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        prompt: input, chatId, model, session
+    try {
+      const response = await fetch('/api/completions', {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          prompt: input, chatId, model, session
+        })
       })
-    }).then((res) => {
-      // Toast notification successful
-      toast.success("Content Writer has written.", {
+      if (response.ok) {
+        toast.success("Content Writer has written.", {
+          id: notification
+        })
+      }
+    } catch (error) {
+      toast.error("Error occured while writing!", {
         id: notification
       })
-
-    })
+    }
   }
 
   return (

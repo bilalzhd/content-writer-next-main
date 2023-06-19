@@ -1,10 +1,11 @@
 'use client'
 import Link from "next/link";
 import { useState } from "react";
+import SignIn from "./SignIn";
 
 export default function Header() {
     const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-    function toggleModal () {
+    function toggleModal() {
         setIsLoginModalOpen(!isLoginModalOpen)
     }
     return (
@@ -29,20 +30,9 @@ export default function Header() {
                     </span>
                 </Link>
 
-                <nav
-                    id="nav"
-                    className="absolute top-0 left-0 z-40 flex flex-col items-center justify-between w-full h-64 pt-5 mt-24 text-sm text-gray-800 bg-white border-t border-gray-200 md:w-auto md:flex-row md:h-24 lg:text-base md:bg-transparent md:mt-0 md:border-none md:py-0 md:flex md:relative"
-                >
-                    <a
-                        href="#"
-                        className="ml-0 mr-0 font-bold duration-100 md:ml-12 md:mr-3 lg:mr-8 transition-color hover:text-indigo-600"
-                    >
-                        Home
-                    </a>
-                    <a
-                        href="#pricing"
-                        className="mr-0 font-bold duration-100 md:mr-3 lg:mr-8 transition-color hover:text-indigo-600"
-                    >
+                <nav id="nav" className="absolute top-0 left-0 z-40 flex flex-col items-center justify-between w-full h-64 pt-5 mt-24 text-sm text-gray-800 bg-white border-t border-gray-200 md:w-auto md:flex-row md:h-24 lg:text-base md:bg-transparent md:mt-0 md:border-none md:py-0 md:flex md:relative" >
+                    <a href="#" className="ml-0 mr-0 font-bold duration-100 md:ml-12 md:mr-3 lg:mr-8 transition-color hover:text-indigo-600"> Home </a>
+                    <a href="#pricing" className="mr-0 font-bold duration-100 md:mr-3 lg:mr-8 transition-color hover:text-indigo-600">
                         Pricing
                     </a>
                     <div className="flex flex-col w-full font-medium border-t border-gray-200 md:hidden">
@@ -60,12 +50,7 @@ export default function Header() {
                         className="relative z-40 inline-block w-auto h-full px-5 py-3 text-sm font-bold leading-none text-white transition duration-300 bg-indigo-700 rounded shadow-md fold-bold lg:bg-white lg:text-indigo-700 sm:w-full lg:shadow-none hover:shadow-xl" >
                         Get Started
                     </a>
-                    <svg
-                        className="absolute top-0 left-0 hidden w-screen max-w-3xl -mt-64 -ml-12 lg:block"
-                        viewBox="0 0 818 815"
-                        xmlns="http://www.w3.org/2000/svg"
-                        xmlnsXlink="http://www.w3.org/1999/xlink"
-                    >
+                    <svg className="absolute top-0 left-0 hidden w-screen max-w-3xl -mt-64 -ml-12 lg:block" viewBox="0 0 818 815" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
                         <defs>
                             <linearGradient x1="0%" y1="0%" x2="100%" y2="100%" id="c">
                                 <stop stopColor="#E614F2" offset="0%" />
@@ -75,28 +60,10 @@ export default function Header() {
                                 <stop stopColor="#657DE9" offset="0%" />
                                 <stop stopColor="#1C0FD7" offset="100%" />
                             </linearGradient>
-                            <filter
-                                x="-4.7%"
-                                y="-3.3%"
-                                width="109.3%"
-                                height="109.3%"
-                                filterUnits="objectBoundingBox"
-                                id="a"
-                            >
-                                <feOffset
-                                    dy="8"
-                                    in="SourceAlpha"
-                                    result="shadowOffsetOuter1"
-                                />
-                                <feGaussianBlur
-                                    stdDeviation="8"
-                                    in="shadowOffsetOuter1"
-                                    result="shadowBlurOuter1"
-                                />
-                                <feColorMatrix
-                                    values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.15 0"
-                                    in="shadowBlurOuter1"
-                                />
+                            <filter x="-4.7%" y="-3.3%" width="109.3%" height="109.3%" filterUnits="objectBoundingBox" id="a">
+                                <feOffset dy="8" in="SourceAlpha" result="shadowOffsetOuter1" />
+                                <feGaussianBlur stdDeviation="8" in="shadowOffsetOuter1" result="shadowBlurOuter1" />
+                                <feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.15 0" in="shadowBlurOuter1" />
                             </filter>
                             <filter
                                 x="-4.7%"
@@ -104,8 +71,7 @@ export default function Header() {
                                 width="109.3%"
                                 height="109.3%"
                                 filterUnits="objectBoundingBox"
-                                id="d"
-                            >
+                                id="d">
                                 <feOffset
                                     dy="8"
                                     in="SourceAlpha"
@@ -151,33 +117,23 @@ export default function Header() {
                     <span className="block w-full h-1 mt-1 duration-200 transform bg-gray-800 rounded-full"></span>
                 </div>
             </div>
-           {isLoginModalOpen && (<div id="defaultModal" tabIndex={-1} aria-hidden="true" className="md:top-16 md:left-60 fixed top-0 left-0 z-100 w-full p-4 overflow-x-hidden overflow-y-auto h-[calc(100%-1rem)] max-h-full">
-                <div className="relative w-full max-w-2xl max-h-full">
-                    <div className="relative bg-white rounded-lg shadow">
-                        <div className="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
-                            <h3 className="text-xl font-semibold text-gray-900">
-                                Login
-                            </h3>
-                            <button type="button" className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="defaultModal">
-                                <svg aria-hidden="true" className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                                <span className="sr-only">Close modal</span>
-                            </button>
-                        </div>
-                        <div className="p-6 space-y-6">
-                            <p className="text-base leading-relaxed text-gray-700 ">
-                                With less than a month to go before the European Union enacts new consumer privacy laws for its citizens, companies around the world are updating their terms of service agreements to comply.
-                            </p>
-                            <p className="text-base leading-relaxed text-gray-700">
-                                The European Union’s General Data Protection Regulation (G.D.P.R.) goes into effect on May 25 and is meant to ensure a common set of data rights in the European Union. It requires organizations to notify users as soon as possible of high-risk data breaches that could personally affect them.
-                            </p>
-                        </div>
-                        <div className="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
-                            <button data-modal-hide="defaultModal" type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">I accept</button>
-                            <button data-modal-hide="defaultModal" type="button" className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Decline</button>
+            {isLoginModalOpen && (
+                <div id="defaultModal" tabIndex={-1} aria-hidden="true" className="md:top-16 md:left-60 fixed top-0 left-0 z-100 w-full p-4 overflow-x-hidden overflow-y-auto h-[calc(100%-1rem)] max-h-full">
+                    <div className="relative w-full max-w-2xl max-h-full">
+                        <div className="relative bg-white rounded-lg shadow">
+                            <div className="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
+                                <h3 className="text-xl font-semibold text-gray-900">
+                                    Login
+                                </h3>
+                                <button onClick={toggleModal} type="button" className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="defaultModal">
+                                    <svg aria-hidden="true" className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                                    <span className="sr-only">Close modal</span>
+                                </button>
+                            </div>
+                            <SignIn />
                         </div>
                     </div>
-                </div>
-            </div>)}
+                </div>)}
         </header>
     )
 }
