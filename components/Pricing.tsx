@@ -80,7 +80,7 @@ export default function Pricing() {
                 </div>
               </div>
             </div>
-            {products && products.map(product => <PricingCard key={product.id} price={product} />)}
+            {products && products.map((product: Price) => <PricingCard key={product.id} price={product} />)}
             
             {/* <div className="relative z-10 w-full max-w-md my-8 bg-white rounded-lg shadow-lg sm:w-2/3 lg:w-1/3 sm:my-5">
               <div className="py-4 text-sm font-semibold leading-none tracking-wide text-center text-white uppercase bg-indigo-500 rounded-t">
