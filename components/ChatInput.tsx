@@ -48,6 +48,12 @@ function ChatInput({ chatId }: Props) {
           prompt: input, chatId, model, session
         })
       })
+      if (response.status === 305) {
+        const data = await response.json();
+        toast.error(data.answer, {
+          id: notification
+        })
+      }
       if (response.ok) {
         toast.success("Content Writer has written.", {
           id: notification

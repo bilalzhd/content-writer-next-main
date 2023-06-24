@@ -1,4 +1,24 @@
+'use client'
+import { CheckCircleIcon } from "@heroicons/react/24/outline";
+import { useEffect, useState } from "react";
+import PricingCard from "./PricingCard";
+import Loader from "./Loader";
+
 export default function Pricing() {
+  const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const getProducts = async () => {
+    setIsLoading(true)
+    const response = await fetch('/api/products/getproducts');
+    const data = await response.json();
+    setIsLoading(false);
+    setProducts(data)
+
+    return data;
+  }
+  useEffect(() => {
+    getProducts();
+  }, [])
   return (
     <div className="relative px-8 py-10 bg-white border-t border-gray-200 md:py-16 lg:py-24 xl:py-40 xl:px-0">
       <div
@@ -12,7 +32,7 @@ export default function Pricing() {
           Simple, Transparent Pricing for Everyone
         </h3>
 
-        <div className="max-w-full mx-auto md:max-w-6xl sm:px-8">
+        {!isLoading ? <div className="max-w-full mx-auto md:max-w-6xl sm:px-8">
           <div className="relative flex flex-col items-center sm:flex-row">
             <div className="relative z-0 w-11/12 max-w-sm my-8 border border-gray-200 rounded-lg sm:w-3/5 lg:w-1/3 sm:my-5 md:-mr-4">
               <div className="overflow-hidden text-black bg-white border-t border-gray-100 rounded-lg shadow-sm">
@@ -34,18 +54,7 @@ export default function Pricing() {
                   <ul>
                     <li className="flex items-center">
                       <div className="p-2 text-green-500 rounded-full fill-current ">
-                        <svg
-                          className="w-6 h-6 align-middle"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                          <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                        </svg>
+                        <CheckCircleIcon className="h-8 w-8"/>
                       </div>
                       <span className="ml-3 text-lg text-gray-700">
                         10 thousand words per month
@@ -53,18 +62,7 @@ export default function Pricing() {
                     </li>
                     <li className="flex items-center">
                       <div className="p-2 text-red-500 rounded-full fill-current ">
-                        <svg
-                          className="w-6 h-6 align-middle"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                          <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                        </svg>
+                      <CheckCircleIcon className="h-8 w-8"/>
                       </div>
                       <span className="ml-3 text-lg text-gray-700">
                         Recaptcha
@@ -75,14 +73,16 @@ export default function Pricing() {
                 <div className="flex items-center p-8 uppercase">
                   <a
                     href="#_"
-                    className="block w-full px-6 py-4 mt-3 text-lg font-semibold text-center text-white bg-gray-900 rounded shadow-sm hover:bg-green-600"
+                    className="block w-full px-6 py-4 mt-3 text-lg font-semibold text-center text-white bg-gray-900 rounded shadow-sm hover:bg-indigo-600"
                   >
                     Select This Plan
                   </a>
                 </div>
               </div>
             </div>
-            <div className="relative z-10 w-full max-w-md my-8 bg-white rounded-lg shadow-lg sm:w-2/3 lg:w-1/3 sm:my-5">
+            {products && products.map(product => <PricingCard key={product.id} price={product} />)}
+            
+            {/* <div className="relative z-10 w-full max-w-md my-8 bg-white rounded-lg shadow-lg sm:w-2/3 lg:w-1/3 sm:my-5">
               <div className="py-4 text-sm font-semibold leading-none tracking-wide text-center text-white uppercase bg-indigo-500 rounded-t">
                 Most Popular
               </div>
@@ -103,18 +103,7 @@ export default function Pricing() {
                 <ul>
                   <li className="flex items-center">
                     <div className="p-2 text-green-500 rounded-full fill-current">
-                      <svg
-                        className="w-6 h-6 align-middle"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                        <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                      </svg>
+                    <CheckCircleIcon className="h-8 w-8"/>
                     </div>
                     <span className="ml-3 text-lg text-gray-700">
                       50 thousand words <br className="lg:block sm:hidden" /> per month
@@ -151,18 +140,7 @@ export default function Pricing() {
                   <ul>
                     <li className="flex items-center">
                       <div className="p-2 text-green-500 rounded-full fill-current ">
-                        <svg
-                          className="w-6 h-6 align-middle"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                          <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                        </svg>
+                      <CheckCircleIcon className="h-8 w-8"/>
                       </div>
                       <span className="ml-3 text-lg text-gray-700">
                         100 thousand words <br className="lg:block sm:hidden" /> per month
@@ -180,11 +158,11 @@ export default function Pricing() {
                   </a>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
-        </div>
+        </div> : <Loader />}
       </div>
-      
+
     </div>
   );
 }
