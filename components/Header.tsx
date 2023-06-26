@@ -35,14 +35,14 @@ export default function Header() {
                             </div>
                             <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                                 <div className="flex flex-shrink-0 items-center">
-                                    <a className="flex relative  items-center h-full font-black leading-none" href="/">
+                                    <a className="hidden md:flex relative  items-center h-full font-black leading-none" href="/">
                                         <svg className="w-auto h-6 text-indigo-600 fill-current" viewBox="0 0 194 116" xmlns="http://www.w3.org/2000/svg">
                                             <g fill-rule="evenodd">
                                                 <path d="M96.869 0L30 116h104l-9.88-17.134H59.64l47.109-81.736zM0 116h19.831L77 17.135 67.088 0z"></path>
                                                 <path d="M87 68.732l9.926 17.143 29.893-51.59L174.15 116H194L126.817 0z"></path>
                                             </g>
                                         </svg>
-                                        <span className="ml-3 hidden md:block text-xl text-gray-800">Landmark<span className="text-pink-500">.</span></span>
+                                        <span className="ml-3 md:block text-xl text-gray-800">Landmark<span className="text-pink-500">.</span></span>
                                     </a>
                                     {/* <img
                                         className="hidden h-8 w-auto lg:block"
