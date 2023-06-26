@@ -29,7 +29,7 @@ export default async function RootLayout({
           {!session ? (
             <Login />
           ) : (
-            <div className='flex'>
+            <div className='flex flex-col md:flex-row'>
               <SidebarContainer />
               <ClientProvider />
               <div className='bg-[#343541] flex-1'>{children}</div>

@@ -19,7 +19,7 @@ export default function NewChat() {
     }
     
     return (
-            <div onClick={createNewChat} className="flex flex-1 border-gray-700 border chatRow">
+            <div onClick={createNewChat} className="flex flex-1 border-gray-700 border chatRow w-full md:w-auto">
                 <PlusIcon className="w-4 h-4" />
                 <p>New Chat</p>
             </div>

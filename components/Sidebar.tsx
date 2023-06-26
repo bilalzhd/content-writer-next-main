@@ -30,12 +30,12 @@ export default function Sidebar({ isSidebarOpen, setIsSidebarOpen }: any) {
         <div className="p-2 flex flex-col h-screen">
             <div className="flex-1">
                 <div>
-                    <div className="flex md:flex-row flex-col items-center md:space-x-4 space-y-2 w-full">
-                        <div onClick={toggleSidebar} className="flex border-gray-700 border chatRow">
-                            <ArrowLeftOnRectangleIcon className="hidden w-4 h-4 md:block" />
-                            <Bars3BottomLeftIcon className="md:hidden  md:w-4 w-full h-8 block" />
-                        </div>
+                    <div className="flex flex-row items-center space-x-4 justify-center w-full">
                         <NewChat />
+                        <div onClick={toggleSidebar} className="flex border-gray-700 border chatRow">
+                            <ArrowLeftOnRectangleIcon className="hidden cursor-pointer w-4 h-4 md:block" />
+                            <Bars3BottomLeftIcon className="md:hidden cursor-pointer w-6 h-6 block" />
+                        </div>
                     </div>
                     <div className="hidden sm:inline">
                         <ModelSelection />
