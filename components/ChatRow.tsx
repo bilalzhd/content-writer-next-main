@@ -34,7 +34,7 @@ export default function ChatRow({ id }: Props) {
     return (
         <Link href={`/chat/${id}`} className={`chatRow justify-center ${active && 'bg-gray-700/50'}`}>
             <ChatBubbleLeftIcon className="h-5 w-5" />
-            <p className="flex-1 hidden md:inline-flex truncate">
+            <p className="flex-1 md:inline-flex truncate">
                 {messages?.docs[messages?.docs.length - 1]?.data().text ||
                     "New Chat"}
             </p>

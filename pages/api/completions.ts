@@ -9,6 +9,7 @@ type Data = {
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
     const { prompt, chatId, model, session } = req.body;
+    if(!session) return;
     const userRef = adminDb.collection("users").doc(session?.user?.email);
     // Get the plan from the user docs plan
     const plans = ['free', 'gold', 'premium'];
