@@ -37,9 +37,9 @@ export default function Sidebar({ isSidebarOpen, setIsSidebarOpen }: any) {
                             <Bars3BottomLeftIcon className="md:hidden cursor-pointer w-6 h-6 block" />
                         </div>
                     </div>
-                    <div className="hidden sm:inline">
+                    {/* <div className="hidden sm:inline">
                         <ModelSelection />
-                    </div>
+                    </div> */}
                     <div className="flex flex-col space-y-2 my-2 ">
                         {chats?.docs.map(chat => (
                             <ChatRow key={chat.id} id={chat.id} />
