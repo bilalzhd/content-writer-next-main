@@ -24,7 +24,7 @@ export default function Sidebar({ isSidebarOpen, setIsSidebarOpen }: any) {
         ));
 
     function toggleSidebar() {
-        setIsSidebarOpen(!isSidebarOpen);
+        setIsSidebarOpen((prevState: any) => !prevState);
     }
     return (<>
         <div className="p-2 flex flex-col h-screen">

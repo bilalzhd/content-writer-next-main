@@ -12,6 +12,10 @@ module.exports = {
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
+      transitionProperty: {'display': 'display'},
+      transitionDuration: {'sidebar': '0.5s'},
+      transitionTimingFunction: {'sidebar': 'ease-in-out'},
+      
     },
   },
   plugins: [],
