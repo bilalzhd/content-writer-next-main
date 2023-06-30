@@ -14,13 +14,22 @@ export default function Message({ message }: Props) {
             setCopied(false);
         }, 3000)
     }
-    const formattedMessage = message.text.replace(/\n(.+)/g, '<br /><br />$1');
+    // const newlineIndex: number = message.text.indexOf();
+    // const formattedMessage: string = newlineIndex !== -1 ? message?.text?.substring(newlineIndex + 1) : message?.text;
+
+    // const formattedMessage = message.text.replace(/\n(.+)/g, '<br /><br />$1');
+    const newlineIndex = message.text.indexOf('\n');
+    let formattedMessage = message.text;
+    if (newlineIndex !== -1) {
+        formattedMessage = formattedMessage.substring(newlineIndex + 1);
+        formattedMessage = formattedMessage.replace(/\n(.+)/g, '<br /><br />$1');
+    }
 
     return (
         <div className={`py-5 px-2 text-white ${isContentWriter && 'bg-[#202123]'}`}>
             <div className="flex space-x-5 max-w-5xl mx-auto">
                 <img src={message.user.avatar} alt="Avatar" className="h-8 w-8 rounded-full" />
-                <div className="flex items-start justify-between"> 
+                <div className="flex items-start justify-between">
                     <p className="pt-1 text-sm" dangerouslySetInnerHTML={{ __html: formattedMessage }}></p>
                     {isContentWriter && <button
                         className="text-sm text-blue-500 focus:outline-none"
@@ -32,6 +41,6 @@ export default function Message({ message }: Props) {
                 </div>
             </div>
         </div>
-        
+
     )
 }

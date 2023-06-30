@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import query, { newQuery } from "@/lib/queryApi";
+import { newQuery } from "@/lib/queryApi";
 import admin from 'firebase-admin';
 import adminDb from "@/firebaseAdmin";
 
@@ -29,11 +29,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
         return;
     }
     const response = await newQuery(prompt, model);
-    console.log(response);
-    const formattedText = response?.text?.replace(/^\n+/, '');
+    // const formattedText = response?.text?.replace(/^\n+/, '');
+    console.log(response?.text)
     const message: ServerMessage = {
         tokensUsed: response?.tokensUsed!,
-        text: formattedText || "Content Writer could not write content for that",
+        text: response?.text || "Content Writer could not write content for that",
         createdAt: admin.firestore.Timestamp.now(),
         user: {
             _id: 'Content Writer',
@@ -42,15 +42,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
         }
     };
 
-    res.status(200).json({ answer: message.text })
-
     let currentTokensUsed = 0;
     if (tokensUsedDoc.exists) {
         const data = tokensUsedDoc.data();
         currentTokensUsed = data?.tokensUsed || 0;
     }
     const newTokensUsed = currentTokensUsed + message.tokensUsed;
-    await userRef.collection("tokensUsed").doc(currentMonthYear).set({ tokensUsed: newTokensUsed })
-    await adminDb.collection("users").doc(session?.user?.email).collection("chats").doc(chatId).collection("messages").add(message)
+    await Promise.all([
+        userRef.collection("tokensUsed").doc(currentMonthYear).set({ tokensUsed: newTokensUsed }),
+        adminDb.collection("users").doc(session?.user?.email).collection("chats").doc(chatId).collection("messages").add(message)
+    ]);
 
+    res.status(200).json({ answer: message.text })
 }
