@@ -82,7 +82,7 @@ export default function Sidebar({ isSidebarOpen, setIsSidebarOpen }: any) {
                         <button onClick={() => signOut()} className="rounded-t-lg hover:bg-gray-500 px-4 py-2 flex items-center space-x-2">
                             <ArrowLeftOnRectangleIcon className="h-6 w-6 mx-3 hidden md:block" />Logout
                         </button>
-                        <button onClick={() => setIsDialogOpen(!isDialogOpen)} className="flex items-center space-x-2  px-4 py-2 hover:bg-gray-500"><UserIcon className="hidden md:block h-6 w-6 mx-3" />Get Pro</button>
+                        <button onClick={() => setIsDialogOpen(true)} className="flex items-center space-x-2  px-4 py-2 hover:bg-gray-500"><UserIcon className="hidden md:block h-6 w-6 mx-3" />Get Pro</button>
                     </div>}
                     <button onClick={() => setIsOptionsOpen(!isOptionsOpen)}>
                         <img className="h-12 w-12 rounded-full cursor-pointer mx-auto mb-2 hover:opacity-50 transition-all duration-200" src={session.user?.image!} alt="user profile image" />

@@ -15,9 +15,8 @@ function ChatInput({ chatId }: Props) {
   const [prompt, setPrompt] = useState("");
   const { data: session } = useSession();
 
-  const { data: model } = useSWR("model", {
-    fallbackData: "text-davinci-003"
-  })
+
+  const model = "text-davinci-003";
 
   const sendMessage = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -53,6 +52,7 @@ function ChatInput({ chatId }: Props) {
         toast.error(data.answer, {
           id: notification
         })
+        console.log(data)
       }
       if (response.ok) {
         toast.success("Content Writer has written.", {

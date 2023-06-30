@@ -9,7 +9,11 @@ type Data = {
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
     const { prompt, chatId, model, session } = req.body;
-    if(!session) return;
+    if(!session || !prompt || !chatId) {
+        res.status(400).json({ answer: "Please provide valid parameters!" });
+        return;
+    }
+
     const userRef = adminDb.collection("users").doc(session?.user?.email);
     // Get the plan from the user docs plan
     const plans = ['free', 'gold', 'premium'];
@@ -20,25 +24,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     const currentMonthYear = `${currentDate.getMonth() + 1}-${currentDate.getFullYear()}`; 
     const tokensUsedDoc = await userRef.collection("tokensUsed").doc(currentMonthYear).get();
     const tokensUsed = tokensUsedDoc.exists ? tokensUsedDoc.data()?.tokensUsed || 0 : 0;
-
-
     if (tokensUsed >= TOKENS_ALLOWED) {
         res.status(305).json({ answer: "You have consumed all your free credit tokens. Upgrade now to start using more!" });
         return;
     }
-
-    if (!prompt) {
-        res.status(205).json({ answer: "Please provide a prompt!" });
-        return;
-    }
-    if (!chatId) {
-        res.status(400).json({ answer: "Please provide a valid Chat ID!" });
-        return;
-    }
     const response = await newQuery(prompt, model);
+    console.log(response);
+    const formattedText = response?.text?.replace(/^\n+/, '');
     const message: ServerMessage = {
         tokensUsed: response?.tokensUsed!,
-        text: response?.text || "Content Writer could not write content for that",
+        text: formattedText || "Content Writer could not write content for that",
         createdAt: admin.firestore.Timestamp.now(),
         user: {
             _id: 'Content Writer',
@@ -46,6 +41,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
             avatar: "/bot.svg"
         }
     };
+
+    res.status(200).json({ answer: message.text })
 
     let currentTokensUsed = 0;
     if (tokensUsedDoc.exists) {
@@ -56,6 +53,4 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     await userRef.collection("tokensUsed").doc(currentMonthYear).set({ tokensUsed: newTokensUsed })
     await adminDb.collection("users").doc(session?.user?.email).collection("chats").doc(chatId).collection("messages").add(message)
 
-    res.status(200).json({ answer: message.text })
 }
-
