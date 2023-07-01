@@ -29,7 +29,7 @@ export default async function RootLayout({
           {!session ? (
             <Login />
           ) : (
-            <div className='flex flex-row'>
+            <div className='flex flex-row max-h-screen overflow-hidden'>
               <SidebarContainer />
               <ClientProvider />
               <div className='bg-[#343541] flex-1'>{children}</div>

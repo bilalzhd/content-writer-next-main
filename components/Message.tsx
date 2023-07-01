@@ -21,14 +21,17 @@ export default function Message({ message }: Props) {
     const newlineIndex = message.text.indexOf('\n');
     let formattedMessage = message.text;
     if (newlineIndex !== -1) {
-        formattedMessage = formattedMessage.substring(newlineIndex + 1);
-        formattedMessage = formattedMessage.replace(/\n(.+)/g, '<br /><br />$1');
+        const lines = formattedMessage.split('\n');
+        if (lines.length > 1) {
+            lines.shift(); // Remove the first line
+            formattedMessage = lines.join('<br />');
+        }
     }
 
     return (
         <div className={`py-5 px-2 text-white ${isContentWriter && 'bg-[#202123]'}`}>
             <div className="flex space-x-5 max-w-5xl mx-auto">
-                <img src={message.user.avatar} alt="Avatar" className="h-8 w-8 rounded-full" />
+                <img src={message.user.avatar} alt="Avatar" className={`h-8 w-8 rounded-full ${isContentWriter && 'mt-5'}`} />
                 <div className="flex items-start justify-between">
                     <p className="pt-1 text-sm" dangerouslySetInnerHTML={{ __html: formattedMessage }}></p>
                     {isContentWriter && <button
