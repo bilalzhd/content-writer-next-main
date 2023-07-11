@@ -40,20 +40,20 @@ const Login = () => {
         <h3 className="w-full px-5 my-3 mt-2 text-xl font-black leading-tight text-center text-gray-900 sm:mt-0 sm:px-0 sm:text-6xl md:px-0">
           Create <span className='text-indigo-500'>brilliant</span> content with ease.
         </h3>
-        <p className='my-3 py-3 text-center'>Writer's block is a thing of the past since you can quickly and easily auto-generate engaging, unique, and high-converting copy for blogs, emails, and advertisements in a variety of tones and languages. Simply select a use case, provide some information, and presto—your copy is prepared!</p>
+        <p className='my-3 py-3 text-center'>Writer&apos;s block is a thing of the past since you can quickly and easily auto-generate engaging, unique, and high-converting copy for blogs, emails, and advertisements in a variety of tones and languages. Simply select a use case, provide some information, and presto—your copy is prepared!</p>
         <Features items={items} images={images} />
       </div>
       <div className='container my-5 md:mb-20 px-4 md:px-12 max-w-3xl mx-auto py-4'>
         <h3 className="w-full px-5 my-3 mt-2 text-xl font-black leading-tight text-center text-gray-900 sm:mt-0 sm:px-0 sm:text-6xl md:px-0">
           Create a <span className='text-indigo-500'>masterpiece</span> that is flawless.
         </h3>
-        <p className='my-3 py-3 text-center'>Use a strong, rich-text editor to quickly transform your unpolished ideas into a polished work; it takes only approximately 15 minutes to compose a 1,000 word essay! Before clicking the submit button, improve the content's quality by rewording, shortening, and doing much more.</p>
+        <p className='my-3 py-3 text-center'>Use a strong, rich-text editor to quickly transform your unpolished ideas into a polished work; it takes only approximately 15 minutes to compose a 1,000 word essay! Before clicking the submit button, improve the content&apos;s quality by rewording, shortening, and doing much more.</p>
         <Features items={items2} images={images2} />
       </div>
 
       <div className='md:max-w-4xl mb-5 md:mb-20 mx-auto'>
         <h3 className="w-full px-5 my-3 mt-2 text-xl font-black leading-tight text-center text-gray-900 sm:mt-0 sm:px-0 sm:text-6xl md:px-0">The top, integrated <span className='text-indigo-500'> writing platform</span></h3>
-        <p className='my-3 py-3 text-center'>Are you sick of having to manage a billion applications in your writing process? With Rytr, you can handle everything from a one location. You won't need to go between tools for SEO, grammar, and other things while writing; instead, you can concentrate on getting the job done quickly.</p>
+        <p className='my-3 py-3 text-center'>Are you sick of having to manage a billion applications in your writing process? With Rytr, you can handle everything from a one location. You won&apos;t need to go between tools for SEO, grammar, and other things while writing; instead, you can concentrate on getting the job done quickly.</p>
       </div>
       <div className='container px-5 flex'>
         <div className='w-1/2 px-2'>
