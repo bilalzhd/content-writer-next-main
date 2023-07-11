@@ -68,12 +68,12 @@ function ChatInput({ chatId }: Props) {
 
   return (
     <div className="bg-gray-700/50 text-gray-400 rounded-lg text-sm">
-      <form className="p-5 space-x-5 flex" onSubmit={sendMessage}>
-        <input value={prompt} type="text" className="focus:outline-none bg-transparent flex-1 disabled:cursor-not-allowed disabled:text-gray-300"
+      <form className="px-5 pt-3 pb-3 space-x-5 flex" onSubmit={sendMessage}>
+        <textarea value={prompt} style={{ resize: "none"}} className="text-justify focus:outline-none bg-transparent flex-1 disabled:cursor-not-allowed disabled:text-gray-300"
           placeholder="Type your prompt here"
           disabled={!session}
           onChange={(e) => setPrompt(e.target.value)}
-        />
+        ></textarea>
         <button
           className="bg-[#11A37F] hover-opacity-50 text-white font-bold px-4 py-2 rounded disabled:bg-gray-600 disabled:cursor-not-allowed disabled:text-gray-700"
           disabled={!session || !prompt}

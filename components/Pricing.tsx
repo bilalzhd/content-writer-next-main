@@ -28,8 +28,8 @@ export default function Pricing() {
         <h2 className="my-5 text-base font-medium tracking-tight text-indigo-500 uppercase">
           Our Pricing
         </h2>
-        <h3 className="w-full max-w-2xl px-5 mt-2 text-2xl font-black leading-tight text-center text-gray-900 sm:mt-0 sm:px-0 sm:text-6xl md:px-0">
-          Simple, Transparent Pricing for Everyone
+        <h3 className="w-full max-w-4xl px-5 mt-2 text-2xl font-black leading-tight text-center text-gray-900 sm:mt-0 sm:px-0 sm:text-6xl md:px-0">
+        Unbelievably powerful but incredibly inexpensive
         </h3>
 
         {!isLoading ? <div className="max-w-full mx-auto md:max-w-6xl sm:px-8">
@@ -54,7 +54,7 @@ export default function Pricing() {
                   <ul>
                     <li className="flex items-center">
                       <div className="p-2 text-green-500 rounded-full fill-current ">
-                        <CheckCircleIcon className="h-8 w-8"/>
+                        <CheckCircleIcon className="h-8 w-8" />
                       </div>
                       <span className="ml-3 text-lg text-gray-700">
                         10 thousand words per month
@@ -62,7 +62,7 @@ export default function Pricing() {
                     </li>
                     <li className="flex items-center">
                       <div className="p-2 text-red-500 rounded-full fill-current ">
-                      <CheckCircleIcon className="h-8 w-8"/>
+                        <CheckCircleIcon className="h-8 w-8" />
                       </div>
                       <span className="ml-3 text-lg text-gray-700">
                         Recaptcha
@@ -70,9 +70,8 @@ export default function Pricing() {
                     </li>
                   </ul>
                 </div>
-                <div className="flex items-center p-8 uppercase">
+                <div className="flex items-center p-8">
                   <a
-                    href="#_"
                     className="block w-full px-6 py-4 mt-3 text-lg font-semibold text-center text-white bg-gray-900 rounded shadow-sm hover:bg-indigo-600"
                   >
                     Select This Plan
@@ -81,7 +80,7 @@ export default function Pricing() {
               </div>
             </div>
             {products && products.map((product: Price) => <PricingCard key={product.id} price={product} />)}
-            
+
             {/* <div className="relative z-10 w-full max-w-md my-8 bg-white rounded-lg shadow-lg sm:w-2/3 lg:w-1/3 sm:my-5">
               <div className="py-4 text-sm font-semibold leading-none tracking-wide text-center text-white uppercase bg-indigo-500 rounded-t">
                 Most Popular

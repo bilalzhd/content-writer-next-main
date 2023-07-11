@@ -19,7 +19,7 @@ const PricingCard: React.FC<PricingCardProps> = ({ price }) => {
         if (price.nickname === "Premium Plan") {
             return "100 thousand"
         }
-        return "50 thousand words"
+        return "50 thousand"
     }
     return (
         <div className="relative z-0 w-11/12 max-w-sm my-8 border border-gray-200 rounded-lg sm:w-3/5 lg:w-1/3 sm:my-5 md:-mr-4">

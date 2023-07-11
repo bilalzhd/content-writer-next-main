@@ -4,15 +4,6 @@ import Sidebar from "./Sidebar";
 import { Bars3BottomLeftIcon } from "@heroicons/react/24/outline";
 function SidebarContainer() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-    // useEffect(() => {
-    //     const body = document.querySelector('body')
-    //     if(isSidebarOpen) {
-    //         body?.classList.add("overflow-hidden");
-    //     }
-    //     return () => {
-    //         body?.classList.remove("overflow-hidden");
-    //     }
-    // }, [isSidebarOpen])
     return (
         <>
             <div className={`bg-[#202123] flex-shrink-0 md:max-w-[260px] h-screen overflow-y-auto md:min-w-[20rem] transition-display duration-sidebar ease-sidebar ${isSidebarOpen ? 'block' : 'hidden'}`}>
