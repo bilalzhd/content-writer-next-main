@@ -13,9 +13,12 @@ export async function newQuery(prompt: string, model: string) {
         })
         const tokensUsed = res.data.usage?.total_tokens
         const text = res.data.choices[0].text
-        return {tokensUsed, text}
+        return {
+            tokensUsed, 
+            text: text || "This should be working"
+        }
     } catch (err: any) {
-       console.error(err);
-       return;
+        console.error(err);
+        return;
     }
 }

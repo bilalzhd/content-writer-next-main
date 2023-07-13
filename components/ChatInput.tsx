@@ -52,7 +52,6 @@ function ChatInput({ chatId }: Props) {
         toast.error(data.answer, {
           id: notification
         })
-        console.log(data)
       }
       if (response.ok) {
         toast.success("Content Writer has written.", {

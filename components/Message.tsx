@@ -34,13 +34,15 @@ export default function Message({ message }: Props) {
                 <img src={message.user.avatar} alt="Avatar" className={`h-8 w-8 rounded-full ${isContentWriter && 'mt-5'}`} />
                 <div className="flex items-start justify-between">
                     <p className="pt-1 text-sm" dangerouslySetInnerHTML={{ __html: formattedMessage }}></p>
-                    {isContentWriter && <button
-                        className="text-sm text-blue-500 focus:outline-none"
-                        onClick={handleCopy}
-                        disabled={copied}
-                    >
-                        {copied ? <ClipboardDocumentCheckIcon className="h-5 w-5 text-white" /> : <ClipboardIcon className="h-5 w-5 text-white" />}
-                    </button>}
+                    <div className="flex items-center h-full mx-4">
+                        {isContentWriter && <button
+                            className="text-sm text-blue-500 focus:outline-none"
+                            onClick={handleCopy}
+                            disabled={copied}
+                        >
+                            {copied ? <ClipboardDocumentCheckIcon className="h-5 w-5 text-white" /> : <ClipboardIcon className="h-5 w-5 text-white" />}
+                        </button>}
+                    </div>
                 </div>
             </div>
         </div>

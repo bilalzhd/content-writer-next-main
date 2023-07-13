@@ -1,52 +1,140 @@
 'use client'
+import { constructPrompt } from "@/lib/constructPrompt";
 import Dialog from "./Dialog";
 import { ArrowLeftOnRectangleIcon, Bars3BottomLeftIcon, ChatBubbleLeftIcon, CheckCircleIcon, TrashIcon, UserIcon, XCircleIcon } from "@heroicons/react/24/outline";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, ChangeEvent } from "react";
+import { toast } from "react-hot-toast";
 
 function SidebarRytr() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(true)
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [isOptionsOpen, setIsOptionsOpen] = useState(false);
-    function toggleSidebar() {
-        setIsSidebarOpen(!isSidebarOpen);
+    const [selectedOption, setSelectedOption] = useState('blog');
+    const [userInput, setUserInput] = useState('');
+    let resize = false;
+    const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
+        setSelectedOption(event.target.value);
+    };
+    let placeholder = '';
+    let label = '';
+
+    if (selectedOption === 'blog' || selectedOption === 'keyword') {
+        placeholder = 'AI writing assistant';
+        label = 'Primary Keyword';
+    } else if (selectedOption === 'brand') {
+        placeholder = 'An AI writing tool for auto-generating content and copies for blogs, social media, and more';
+        label = 'Brand Description';
+        resize = true;
+    } else if (selectedOption === 'business') {
+        placeholder = 'AI writing assistant for content writers and digital marketers';
+        label = 'Business Idea';
+    } else if (selectedOption === 'cta') {
+        placeholder = 'An AI writing assistant that helps you automatically generate content for anything - from emails & blogs to ads & social media, Rytr can create original, engaging copies for you within seconds, at a fraction of the cost.';
+        label = 'Description';
+    } else if (selectedOption === 'job') {
+        placeholder = 'Software Engineer';
+        label = 'Job Role';
+    } else if (selectedOption === 'seo') {
+        placeholder = 'AI writing assistant, content generator';
+        label = 'Target Keywords';
+    } else if (selectedOption === 'song') {
+        placeholder = 'Soothing song for a couple in love';
+        label = 'Song Idea';
+    } else if (selectedOption === 'video') {
+        placeholder = 'AI writing assistants';
+        label = 'Keywords';
     }
+    let resizeTextarea: number = resize ? 4 : 0;
+
+    const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
     const { data: session } = useSession();
+    async function handleWriteFormSubmission() {
+        if (!userInput) return;
+        setUserInput("");
+        const prompt = constructPrompt(selectedOption, userInput);
+      
+        try {
+          const response = await fetch("/api/write", {
+            method: "POST",
+            body: JSON.stringify({ prompt, session }),
+            headers: {
+              "Content-Type": "application/json"
+            }
+          });
+      
+          if (response.ok) {
+            const data = await response.json();
+            toast.success("Content Writer has written.");
+            console.log(data);
+          } else if (response.status === 305) {
+            const data = await response.json();
+            toast.error(data.answer);
+          } else {
+            throw new Error("An error occurred while writing!");
+          }
+        } catch (error) {
+          console.error(error);
+          toast.error("Error occurred while writing!");
+        }
+      }
+      
     return (
         <div className="bg-[#202123] flex-shrink-0">
             <div className="p-2 flex flex-col h-screen">
                 <div className="flex-1">
                     <div>
                         <div className="flex flex-row items-center space-x-4 justify-center w-full">
+                            <Link href="/" className="bg-transparent border border-gray-700 text-gray-200 px-5 py-2 rounded-lg">Chat</Link>
                             <div onClick={toggleSidebar} className="flex border-gray-700 border chatRow">
                                 <ArrowLeftOnRectangleIcon className="hidden cursor-pointer w-4 h-4 md:block" />
                                 <Bars3BottomLeftIcon className="md:hidden cursor-pointer w-6 h-6 block" />
                             </div>
                         </div>
 
-                        <div className="flex flex-col space-y-2 my-2 ">
-                            <div className="flex space-x-2 text-white">
-                                <div className="flex flex-col">
-                                    <label htmlFor="language">Select Language</label>
-                                    <select className="text-black" name="language" id="language">
-                                        <option value="en">English</option>
-                                    </select>
+                        <div className="flex flex-col space-y-5 my-2 ">
+                            <div className="flex-1">
+                                <div className="flex space-x-2 text-white">
+                                    <div className="flex flex-col">
+                                        <label htmlFor="language" className="text-center">Select Language</label>
+                                        <select value="English" className="text-gray-200 bg-gray-600 px-8 py-3 rounded-lg my-3" name="language" id="language">
+                                            <option value="Arabic">Arabic</option>
+                                            <option value="Bulgarian">Bulgarian</option>
+                                            <option value="Chinese">Chinese</option>
+                                            <option value="English">English</option>
+                                            <option value="Hindi">Hindi</option>
+                                        </select>
+                                    </div>
+                                    <div className="flex flex-col">
+                                        <label htmlFor="tone" className="text-center">Select Tone</label>
+                                        <select className="text-gray-200 bg-gray-600 px-8 py-3 rounded-lg my-3" name="tone" id="tone">
+                                            <option value="Convincing">Convincing</option>
+                                            <option value="Humble">Humble</option>
+                                            <option value="Thoughtful">Thoughtful</option>
+                                            <option value="Worried">Worried</option>
+                                            <option value="Informative">Informative</option>
+                                        </select>
+                                    </div>
                                 </div>
                                 <div className="flex flex-col">
-                                    <label htmlFor="language">Select Language</label>
-                                    <select className="text-black" name="language" id="language">
-                                        <option value="en">English</option>
+                                    <label htmlFor="use_case" className="text-gray-200">Choose Use Case</label>
+                                    <select value={selectedOption} onChange={handleChange} id="use_case" className="text-gray-200 bg-gray-600 px-8 py-3 rounded-lg my-3 cursor-pointer">
+                                        <option value="blog">Blog Outline</option>
+                                        <option value="brand">Brand Name</option>
+                                        <option value="business">Business Idea Pitch</option>
+                                        <option value="cta">Call to action</option>
+                                        <option value="job">Job Description</option>
+                                        <option value="keyword">Keyword Generator</option>
+                                        <option value="seo">SEO Meta Title</option>
+                                        <option value="song">Song Lyrics</option>
+                                        <option value="video">Video Idea</option>
                                     </select>
                                 </div>
+                                <label htmlFor="input" className="my-3 text-gray-200">{label}</label>
+                                <textarea value={userInput} onChange={(event) => setUserInput(event.target.value)} id="input" className={`w-full rounded-lg ${!resize && 'resize-none'} px-3 py-2 bg-gray-600 border border-gray-700`} placeholder={placeholder} rows={resizeTextarea}></textarea>
                             </div>
-                            <Link href={`/chat/`} className={`chatRow justify-center`}>
-                                <ChatBubbleLeftIcon className="h-5 w-5" />
-                                <p className="flex-1 md:inline-flex truncate">
-                                    New Chat
-                                </p>
-                                <TrashIcon className="h-5 w-5 text-gray-700 hover:text-red-700" />
-                            </Link>
+                            <button onClick={handleWriteFormSubmission} className="bg-gray-200 px-4 py-2 rounded-lg">Write For Me</button>
                         </div>
                     </div>
                 </div>
