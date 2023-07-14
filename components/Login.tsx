@@ -71,7 +71,7 @@ const Login = () => {
       </div>
       <div className="container my-5 md:my-20 py-5 ">
         <h3 className='max-w-3xl mx-auto px-5 my-3 mt-2 text-xl font-black leading-tight text-center text-gray-900 sm:mt-0 sm:px-0 sm:text-3xl md:px-0'>Automatically produce top-notch content for more than <span className='text-indigo-500'>20+ use-cases</span></h3>
-        <div className="boxes flex flex-col md:flex-row gap-3 my-5 max-w-4xl mx-auto">
+        <div className="boxes flex flex-col md:flex-row gap-3 my-5 max-w-4xl mx-auto items-center">
           <div className="box transition-all duration-300 hover:shadow-lg max-w-xs flex flex-col justify-center items-center rounded p-4 bg-gray-100">
             <div className='w-16 h-16 rounded-full bg-cover' style={{ backgroundImage: "url('./blog.svg')" }}></div>
               <div className="min-h-150px flex my-1 gap-2 flex-col max-w justify-center items-center mt-2 max-w-sm">
@@ -94,7 +94,7 @@ const Login = () => {
               </div>
             </div>
           </div>
-        <div className="boxes flex flex-col md:flex-row gap-3 my-5 max-w-4xl mx-auto">
+        <div className="boxes flex flex-col md:flex-row gap-3 my-5 max-w-4xl mx-auto items-center">
           <div className="box hover:shadow-lg transition-all duration-300 max-w-xs flex flex-col justify-center items-center rounded p-4 bg-gray-100">
             <div className='w-16 h-16 rounded-full bg-cover' style={{ backgroundImage: "url('./email.svg')" }}></div>
               <div className="min-h-150px flex my-1 gap-2 flex-col max-w justify-center items-center mt-2 max-w-sm">

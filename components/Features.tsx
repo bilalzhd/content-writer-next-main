@@ -28,8 +28,8 @@ function Features({ items, images }: FeaturesProps) {
   const [activeItem, setActiveItem] = useState(1);
 
   return (
-    <div className="flex flex-col md:flex-row">
-      <ul className="my-4 w-96">
+    <div className="flex flex-col md:flex-row items-center">
+      <ul className="my-4 md:w-96">
         {items.map((item, index) => (
           <FeatureItem
             key={index}
@@ -40,7 +40,7 @@ function Features({ items, images }: FeaturesProps) {
           </FeatureItem>
         ))}
       </ul>
-      <ul className="w-96 flex items-center">
+      <ul className="md:w-96 flex items-center">
         {images.map((image, index) => (
           <li
             key={index}

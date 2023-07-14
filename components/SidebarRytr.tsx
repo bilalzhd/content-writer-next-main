@@ -88,7 +88,7 @@ function SidebarRytr({ setResponse, isSidebarOpen, setIsSidebarOpen }: any) {
     }
     return (
         <>
-            {isSidebarOpen && <div className="bg-[#202123] flex-shrink-0">
+            {isSidebarOpen && <div className="bg-[#202123] flex-shrink-0 max-w-[350px]">
                 <div className="p-2 flex flex-col h-screen">
                     <div className="flex-1">
                         <div>
