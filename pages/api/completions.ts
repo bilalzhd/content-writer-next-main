@@ -27,30 +27,33 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     res.status(305).json({ answer: "You have consumed all your free credit tokens. Upgrade now to start using more!" });
     return;
   }
+  try {
+    const response = await newQuery(prompt, model);
+    const message: ServerMessage = {
+      tokensUsed: response?.tokensUsed!,
+      text: response?.text || "Content Writer could not write content for that",
+      createdAt: admin.firestore.Timestamp.now(),
+      user: {
+        _id: 'Content Writer',
+        name: 'Content Writer',
+        avatar: "/bot.svg"
+      }
+    };
 
-  const response = await newQuery(prompt, model);
+    const currentTokensUsed = tokensUsedDoc.exists ? tokensUsedDoc.data()?.tokensUsed || 0 : 0;
+    const newTokensUsed = currentTokensUsed + message.tokensUsed;
 
-  const message: ServerMessage = {
-    tokensUsed: response?.tokensUsed!,
-    text: response?.text || "Content Writer could not write content for that",
-    createdAt: admin.firestore.Timestamp.now(),
-    user: {
-      _id: 'Content Writer',
-      name: 'Content Writer',
-      avatar: "/bot.svg"
-    }
-  };
+    const batch = adminDb.batch();
+    batch.set(userRef.collection("tokensUsed").doc(currentMonthYear), { tokensUsed: newTokensUsed });
+    batch.set(adminDb.collection("users").doc(session?.user?.email).collection("chats").doc(chatId).collection("messages").doc(), message);
 
-  const currentTokensUsed = tokensUsedDoc.exists ? tokensUsedDoc.data()?.tokensUsed || 0 : 0;
-  const newTokensUsed = currentTokensUsed + message.tokensUsed;
+    await batch.commit();
 
-  const batch = adminDb.batch();
-  batch.set(userRef.collection("tokensUsed").doc(currentMonthYear), { tokensUsed: newTokensUsed });
-  batch.set(adminDb.collection("users").doc(session?.user?.email).collection("chats").doc(chatId).collection("messages").doc(), message);
+    res.status(200).json({ answer: message.text });
+  } catch (err) {
+    res.status(500).json({ answer: "Timeout" });
+  }
 
-  await batch.commit();
-
-  res.status(200).json({ answer: message.text });
 }
 
 
