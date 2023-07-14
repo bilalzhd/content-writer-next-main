@@ -38,30 +38,25 @@ function ChatInput({ chatId }: Props) {
     const notification = toast.loading("Content Writer is writing...");
 
     try {
-      const response = await fetch('/api/completions', {
+      // Fetch the response from the OpenAI API with the signal from AbortController
+      const response = await fetch("/api/completions", {
         method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           prompt: input, chatId, model, session
         })
-      })
-      if (response.status === 305) {
-        const data = await response.json();
-        toast.error(data.answer, {
-          id: notification
-        })
-      }
-      if (response.ok) {
-        toast.success("Content Writer has written.", {
-          id: notification
-        })
-      }
+      });
+
+      // Read the response as a stream of data
+      const data = await response.json();
+      console.log(data)
+      toast.success("success", {id: notification})
     } catch (error) {
-      toast.error("Error occured while writing!", {
-        id: notification
-      })
+      // Handle fetch request errors
+      console.error("Error:", error);
+      toast.error("error", {id:notification})
     }
   }
 
@@ -88,3 +83,70 @@ function ChatInput({ chatId }: Props) {
 }
 
 export default ChatInput
+/* 
+const sendMessage = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!prompt) return;
+    const input = prompt.trim();
+    setPrompt("");
+    const message: UserMessage = {
+      text: input,
+      createdAt: serverTimestamp(),
+      user: {
+        _id: session?.user?.email!,
+        name: session?.user?.name!,
+        avatar: session?.user?.image || `https://ui-avatars.com/api/?name=${session?.user?.name}`,
+      }
+    }
+    await addDoc(collection(db, 'users', session?.user?.email!, 'chats', chatId, 'messages'), message);
+
+    // Toast Notification to say loading
+    const notification = toast.loading("Content Writer is writing...");
+
+    // try {
+    //   const response = await fetch('/api/completions', {
+    //     method: "POST",
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify({
+    //       prompt: input, chatId, model, session
+    //     })
+    //   })
+    //   if (response.status === 305) {
+    //     const data = await response.json();
+    //     toast.error(data.answer, {
+    //       id: notification
+    //     })
+    //   }
+    //   if (response.ok) {
+    //     toast.success("Content Writer has written.", {
+    //       id: notification
+    //     })
+    //   }
+    // } catch (error) {
+    //   toast.error("Error occured while writing!", {
+    //     id: notification
+    //   })
+    // }
+    try {
+      // Fetch the response from the OpenAI API with the signal from AbortController
+      const response = await fetch(API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          prompt: input, chatId, model, session
+        })
+      });
+
+      // Read the response as a stream of data
+      const data = await response.json();
+      console.log(data)
+      toast.success("success", {id: notification})
+    } catch (error) {
+      // Handle fetch request errors
+      console.error("Error:", error);
+    }
+  }*/

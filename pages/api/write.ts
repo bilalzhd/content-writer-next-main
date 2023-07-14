@@ -10,7 +10,6 @@ type Data = {
 export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
   try {
     const { prompt, session } = req.body;
-    console.log(prompt);
 
     // if (!prompt) {
     //   res.status(400).json({ answer: "Please provide a valid query!" });
