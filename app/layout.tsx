@@ -5,6 +5,7 @@ import './globals.css'
 import { Inter } from 'next/font/google'
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 import Login from '@/components/Login';
+import ChatApp from '@/components/ChatApp';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -26,7 +27,9 @@ export default async function RootLayout({
           {!session ? (
             <Login />
           ) : (
-            <div>{children}</div>
+            <ChatApp>
+              {children}
+            </ChatApp>
           )}
         </SessionProvider>
       </body >

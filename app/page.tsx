@@ -3,7 +3,6 @@ import ChatApp from '@/components/ChatApp';
 import { SunIcon } from '@heroicons/react/24/outline';
 export default function HomePage() {
   return (
-    <ChatApp>
       <div className="text-white flex flex-col items-center justify-center h-screen px-2">
         <h1 className="text-5xl font-bold mb-20">Content Writer</h1>
         <div>
@@ -20,6 +19,5 @@ export default function HomePage() {
           </div>
         </div>
       </div>
-    </ChatApp>
   )
 }

@@ -5,13 +5,13 @@ import { collection, deleteDoc, doc } from "firebase/firestore"
 import { useSession } from "next-auth/react"
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { useCollection } from "react-firebase-hooks/firestore"
 
 type Props = {
     id: string
 }
-export default function ChatRow({ id }: Props) {
+const ChatRow = React.memo(({ id }: Props) => {
     const pathname = usePathname();
     const router = useRouter();
     const { data: session } = useSession();
@@ -41,4 +41,5 @@ export default function ChatRow({ id }: Props) {
             <TrashIcon onClick={removeChat} className="h-5 w-5 text-gray-700 hover:text-red-700" />
         </Link>
     )
-}
+});
+export default ChatRow;

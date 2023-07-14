@@ -10,27 +10,28 @@ type Data = {
 export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
   try {
     const { prompt, session } = req.body;
+    console.log(prompt);
 
-    if (!prompt) {
-      res.status(400).json({ answer: "Please provide a valid query!" });
-      return;
-    }
+    // if (!prompt) {
+    //   res.status(400).json({ answer: "Please provide a valid query!" });
+    //   return;
+    // }
 
-    const userRef = adminDb.collection("users").doc(session?.user?.email);
-    const plans = ['free', 'gold', 'premium'];
-    const usersPlan = plans[0]; // Placeholder for getting user's plan
-    const TOKENS_ALLOWED = usersPlan === "free" ? 10000 : usersPlan === "gold" ? 50000 : 100000;
+    // const userRef = adminDb.collection("users").doc(session?.user?.email);
+    // const plans = ['free', 'gold', 'premium'];
+    // const usersPlan = plans[0]; // Placeholder for getting user's plan
+    // const TOKENS_ALLOWED = usersPlan === "free" ? 10000 : usersPlan === "gold" ? 50000 : 100000;
 
-    const currentDate = new Date();
-    const currentMonthYear = `${currentDate.getMonth() + 1}-${currentDate.getFullYear()}`;
-    const tokensUsedDoc = await userRef.collection("tokensUsed").doc(currentMonthYear).get();
-    const tokensUsed = tokensUsedDoc.exists ? tokensUsedDoc.data()?.tokensUsed || 0 : 0;
-    if (tokensUsed >= TOKENS_ALLOWED) {
-      res.status(305).json({ answer: "You have consumed all your free credit tokens. Upgrade now to start using more!" });
-      return;
-    }
+    // const currentDate = new Date();
+    // const currentMonthYear = `${currentDate.getMonth() + 1}-${currentDate.getFullYear()}`;
+    // const tokensUsedDoc = await userRef.collection("tokensUsed").doc(currentMonthYear).get();
+    // const tokensUsed = tokensUsedDoc.exists ? tokensUsedDoc.data()?.tokensUsed || 0 : 0;
+    // if (tokensUsed >= TOKENS_ALLOWED) {
+    //   res.status(305).json({ answer: "You have consumed all your free credit tokens. Upgrade now to start using more!" });
+    //   return;
+    // }
 
-    const response = await newQuery(prompt, "gpt-3.5-turbo");
+    const response = await newQuery(prompt, "text-davinci-003");
     const message = {
       tokensUsed: response?.tokensUsed!,
       text: response?.text || "Content Writer could not write content for that!",
@@ -42,12 +43,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
       }
     };
 
-    const currentTokensUsed = tokensUsedDoc.exists ? tokensUsedDoc.data()?.tokensUsed || 0 : 0;
-    const newTokensUsed = currentTokensUsed + message.tokensUsed;
+    // const currentTokensUsed = tokensUsedDoc.exists ? tokensUsedDoc.data()?.tokensUsed || 0 : 0;
+    // const newTokensUsed = currentTokensUsed + message.tokensUsed;
 
-    const batch = adminDb.batch();
-    batch.set(userRef.collection("tokensUsed").doc(currentMonthYear), { tokensUsed: newTokensUsed });
-    await batch.commit();
+    // const batch = adminDb.batch();
+    // batch.set(userRef.collection("tokensUsed").doc(currentMonthYear), { tokensUsed: newTokensUsed });
+    // await batch.commit();
 
     res.status(200).json({ answer: message.text });
   } catch (error) {

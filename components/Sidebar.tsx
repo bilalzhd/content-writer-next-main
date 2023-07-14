@@ -8,20 +8,18 @@ import ChatRow from "./ChatRow";
 import Loader from "./Loader";
 import ModelSelection from "./ModelSelection";
 import { ArrowLeftOnRectangleIcon, UserIcon, CheckCircleIcon, XCircleIcon, Bars3BottomLeftIcon } from "@heroicons/react/24/outline";
-import { useState } from "react";
+import React, { useState } from "react";
 import Dialog from "./Dialog";
+import Link from "next/link";
 
-export default function Sidebar({ isSidebarOpen, setIsSidebarOpen }: any) {
+const Sidebar = React.memo(({ isSidebarOpen, setIsSidebarOpen }: any) => {
 
     const [isOptionsOpen, setIsOptionsOpen] = useState(false);
     const [isDialogOpen, setIsDialogOpen] = useState(false);
 
     const { data: session, status } = useSession();
     const [chats, loading, error] = useCollection(
-        session && query(
-            collection(db, "users", session.user?.email!, "chats"),
-            orderBy("createdAt", "asc")
-        ));
+        session && query( collection(db, "users", session.user?.email!, "chats"), orderBy("createdAt", "asc")));
 
     function toggleSidebar() {
         setIsSidebarOpen((prevState: any) => !prevState);
@@ -32,6 +30,7 @@ export default function Sidebar({ isSidebarOpen, setIsSidebarOpen }: any) {
                 <div>
                     <div className="flex flex-row items-center space-x-4 justify-center w-full">
                         <NewChat />
+                        <button className="text-gray-300 border-gray-600 rounded-lg border px-4 py-2"><Link href="/rytr">Writer</Link></button>
                         <div onClick={toggleSidebar} className="flex border-gray-700 border chatRow">
                             <ArrowLeftOnRectangleIcon className="hidden cursor-pointer w-4 h-4 md:block" />
                             <Bars3BottomLeftIcon className="md:hidden cursor-pointer w-6 h-6 block" />
@@ -88,7 +87,8 @@ export default function Sidebar({ isSidebarOpen, setIsSidebarOpen }: any) {
                         <img className="h-12 w-12 rounded-full cursor-pointer mx-auto mb-2 hover:opacity-50 transition-all duration-200" src={session.user?.image!} alt="user profile image" />
                     </button>
                 </>)}
-                
-            </div>
+
+        </div>
     </>)
-}
+})
+export default Sidebar;
