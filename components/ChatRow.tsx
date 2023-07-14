@@ -34,7 +34,7 @@ const ChatRow = ({ id }: Props) => {
 
     let text = messages?.docs[messages?.docs.length - 1]?.data().text; // Get the message text
 
-    if (text.length > maxLength) {
+    if (text?.length > maxLength) {
         text = text.substring(0, maxLength); // Truncate the text to the maximum length
     }
 

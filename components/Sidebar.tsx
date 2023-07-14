@@ -30,7 +30,7 @@ const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }: any) => {
                 <div>
                     <div className="flex flex-row items-center space-x-4 justify-center w-full">
                         <NewChat />
-                        <button className="text-gray-300 border-gray-600 rounded-lg border px-4 py-2"><Link href="/rytr">Writer</Link></button>
+                        <button className="text-gray-300 border-gray-600 rounded-lg border px-4 py-2"><Link href="/writer">Writer</Link></button>
                         <div onClick={toggleSidebar} className="flex border-gray-700 border chatRow">
                             <ArrowLeftOnRectangleIcon className="hidden cursor-pointer w-4 h-4 md:block" />
                             <Bars3BottomLeftIcon className="md:hidden cursor-pointer w-6 h-6 block" />

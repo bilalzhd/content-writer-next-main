@@ -33,7 +33,7 @@ function SidebarRytr({ setResponse, isSidebarOpen, setIsSidebarOpen }: any) {
         placeholder = 'AI writing assistant for content writers and digital marketers';
         label = 'Business Idea';
     } else if (selectedOption === 'cta') {
-        placeholder = 'An AI writing assistant that helps you automatically generate content for anything - from emails & blogs to ads & social media, Rytr can create original, engaging copies for you within seconds, at a fraction of the cost.';
+        placeholder = 'An AI writing assistant that helps you automatically generate content for anything - from emails & blogs to ads & social media, Content Writer can create original, engaging copies for you within seconds, at a fraction of the cost.';
         label = 'Description';
     } else if (selectedOption === 'job') {
         placeholder = 'Software Engineer';

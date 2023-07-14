@@ -53,7 +53,7 @@ const Login = () => {
 
       <div className='md:max-w-4xl mb-5 md:mb-20 mx-auto'>
         <h3 className="w-full px-5 my-3 mt-2 text-xl font-black leading-tight text-center text-gray-900 sm:mt-0 sm:px-0 sm:text-6xl md:px-0">The top, integrated <span className='text-indigo-500'> writing platform</span></h3>
-        <p className='my-3 py-3 text-center'>Are you sick of having to manage a billion applications in your writing process? With Rytr, you can handle everything from a one location. You won&apos;t need to go between tools for SEO, grammar, and other things while writing; instead, you can concentrate on getting the job done quickly.</p>
+        <p className='my-3 py-3 text-center'>Are you sick of having to manage a billion applications in your writing process? With Content Writer, you can handle everything from a one location. You won&apos;t need to go between tools for SEO, grammar, and other things while writing; instead, you can concentrate on getting the job done quickly.</p>
       </div>
       <div className='container px-5 flex'>
         <div className='w-1/2 px-2'>
