@@ -54,7 +54,10 @@ function SidebarRytr({ setResponse, isSidebarOpen, setIsSidebarOpen }: any) {
     const { data: session } = useSession();
     async function handleWriteFormSubmission() {
         setIsLoading(true);
-        if (!userInput) return;
+        if (!userInput) {
+            setIsLoading(false);
+            return;
+        };
         setUserInput("");
         const prompt = constructPrompt(language, selectedOption, userInput);
 
