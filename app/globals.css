@@ -27,6 +27,7 @@
   border-radius: 50%;
   vertical-align: middle;
 }
+.rdw-editor-toolbar {background-color:#25262d !important;}
 @media screen and (min-width: 768px) {
   .min-h-150px {
     min-height: 150px;

@@ -5,7 +5,7 @@ import { collection, deleteDoc, doc } from "firebase/firestore"
 import { useSession } from "next-auth/react"
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { useCollection } from "react-firebase-hooks/firestore"
 
 type Props = {
@@ -27,16 +27,22 @@ const ChatRow = ({ id }: Props) => {
     }, [pathname, id])
 
     const removeChat = async () => {
-        await deleteDoc(doc(db,'users', session?.user?.email!, 'chats', id));
+        await deleteDoc(doc(db, 'users', session?.user?.email!, 'chats', id));
         router.replace('/');
+    }
+    const maxLength = 20; // Set the maximum length of the message
+
+    let text = messages?.docs[messages?.docs.length - 1]?.data().text; // Get the message text
+
+    if (text.length > maxLength) {
+        text = text.substring(0, maxLength); // Truncate the text to the maximum length
     }
 
     return (
         <Link href={`/chat/${id}`} className={`chatRow justify-center ${active && 'bg-gray-700/50'}`}>
             <ChatBubbleLeftIcon className="h-5 w-5" />
             <p className="flex-1 md:inline-flex truncate">
-                {messages?.docs[messages?.docs.length - 1]?.data().text ||
-                    "New Chat"}
+                {text || "New Chat"}
             </p>
             <TrashIcon onClick={removeChat} className="h-5 w-5 text-gray-700 hover:text-red-700" />
         </Link>
