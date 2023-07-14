@@ -11,7 +11,7 @@ import { useCollection } from "react-firebase-hooks/firestore"
 type Props = {
     id: string
 }
-const ChatRow = React.memo(({ id }: Props) => {
+const ChatRow = ({ id }: Props) => {
     const pathname = usePathname();
     const router = useRouter();
     const { data: session } = useSession();
@@ -41,5 +41,5 @@ const ChatRow = React.memo(({ id }: Props) => {
             <TrashIcon onClick={removeChat} className="h-5 w-5 text-gray-700 hover:text-red-700" />
         </Link>
     )
-});
+}
 export default ChatRow;

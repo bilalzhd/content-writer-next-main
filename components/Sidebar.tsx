@@ -12,7 +12,7 @@ import React, { useState } from "react";
 import Dialog from "./Dialog";
 import Link from "next/link";
 
-const Sidebar = React.memo(({ isSidebarOpen, setIsSidebarOpen }: any) => {
+const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }: any) => {
 
     const [isOptionsOpen, setIsOptionsOpen] = useState(false);
     const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -90,5 +90,5 @@ const Sidebar = React.memo(({ isSidebarOpen, setIsSidebarOpen }: any) => {
 
         </div>
     </>)
-})
+}
 export default Sidebar;
