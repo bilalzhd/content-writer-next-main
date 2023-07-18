@@ -13,8 +13,6 @@ export default function Pricing() {
     const data = await response.json();
     setIsLoading(false);
     setProducts(data)
-
-    return data;
   }
   useEffect(() => {
     getProducts();
@@ -29,7 +27,7 @@ export default function Pricing() {
           Our Pricing
         </h2>
         <h3 className="w-full max-w-4xl px-5 mt-2 text-2xl font-black leading-tight text-center text-gray-900 sm:mt-0 sm:px-0 sm:text-6xl md:px-0">
-        Unbelievably powerful but incredibly inexpensive
+          Unbelievably powerful but incredibly inexpensive
         </h3>
 
         {!isLoading ? <div className="max-w-full mx-auto md:max-w-6xl sm:px-8">

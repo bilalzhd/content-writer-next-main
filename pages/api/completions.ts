@@ -51,7 +51,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
 
     res.status(200).json({ answer: message.text });
   } catch (err) {
-    res.status(500).json({ answer: "Timeout" });
+    res.status(504).json({ answer: "An unexpected error occured, try again!" });
   }
 
 }

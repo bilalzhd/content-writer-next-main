@@ -51,7 +51,6 @@ function ChatInput({ chatId }: Props) {
 
       // Read the response as a stream of data
       const data = await response.json();
-      console.log(data)
       toast.success("success", {id: notification})
     } catch (error) {
       // Handle fetch request errors
