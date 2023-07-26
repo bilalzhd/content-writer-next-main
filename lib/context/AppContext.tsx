@@ -7,7 +7,7 @@ interface AppContextData {
     toggleDarkMode: () => void;
 }
 const defaultContextData: AppContextData = {
-    darkMode: false,
+    darkMode: true,
     toggleDarkMode: () => { },
 };
 
@@ -16,7 +16,7 @@ const AppContext = createContext<AppContextData>(defaultContextData);
 export const useAppContext = () => useContext(AppContext);
 
 export function AppProvider({ children }: { children: React.ReactNode }) {
-    const [darkMode, setDarkMode] = useState<boolean>(false);
+    const [darkMode, setDarkMode] = useState<boolean>(true);
 
     const toggleDarkMode = () => {
         setDarkMode((prevMode) => !prevMode);

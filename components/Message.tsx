@@ -42,7 +42,7 @@ export default function Message({ message }: Props) {
                             onClick={handleCopy}
                             disabled={copied}
                         >
-                            {copied ? <ClipboardDocumentCheckIcon className="h-5 w-5 text-white" /> : <ClipboardIcon className="h-5 w-5 text-white" />}
+                            {copied ? <ClipboardDocumentCheckIcon className={`h-5 w-5 ${darkMode ? 'text-white' : 'text-gray-900'}`} /> : <ClipboardIcon className={`h-5 w-5 ${darkMode ? 'text-white' : 'text-gray-900'}`} />}
                         </button>}
                     </div>
                 </div>
