@@ -1,3 +1,4 @@
+import { useAppContext } from "@/lib/context/AppContext";
 import { ClipboardDocumentCheckIcon, ClipboardIcon } from "@heroicons/react/24/outline";
 import { DocumentData } from "firebase/firestore";
 import { useState } from "react";
@@ -5,6 +6,7 @@ type Props = {
     message: DocumentData
 }
 export default function Message({ message }: Props) {
+    const {darkMode} = useAppContext();
     const isContentWriter = message.user.name === "Content Writer";
     const [copied, setCopied] = useState(false);
     function handleCopy() {
@@ -23,13 +25,13 @@ export default function Message({ message }: Props) {
     if (newlineIndex !== -1) {
         const lines = formattedMessage.split('\n');
         if (lines.length > 1) {
-            lines.shift(); // Remove the first line
+            lines.shift(); 
             formattedMessage = lines.join('<br />');
         }
     }
 
     return (
-        <div className={`py-5 px-2 text-white ${isContentWriter && 'bg-[#202123]'}`}>
+        <div className={`py-5 px-2 ${darkMode ? 'text-white' : 'text-gray-900'} ${isContentWriter && (darkMode ? 'bg-[#202123]' : 'bg-gray-200')}`}>
             <div className="flex space-x-5 max-w-5xl mx-auto">
                 <img src={message.user.avatar} alt="Avatar" className={`h-8 w-8 rounded-full ${isContentWriter && 'mt-5'}`} />
                 <div className="flex items-start justify-between">

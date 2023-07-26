@@ -1,5 +1,6 @@
 'use client'
 import { db } from "@/firebase"
+import { useAppContext } from "@/lib/context/AppContext"
 import { ChatBubbleLeftIcon, TrashIcon } from "@heroicons/react/24/outline"
 import { collection, deleteDoc, doc } from "firebase/firestore"
 import { useSession } from "next-auth/react"
@@ -16,6 +17,7 @@ const ChatRow = ({ id }: Props) => {
     const router = useRouter();
     const { data: session } = useSession();
     const [active, setActive] = useState(false);
+    const {darkMode} = useAppContext();
 
     const [messages] = useCollection(
         collection(
@@ -39,7 +41,7 @@ const ChatRow = ({ id }: Props) => {
     }
 
     return (
-        <Link href={`/chat/${id}`} className={`chatRow justify-center ${active && 'bg-gray-700/50'}`}>
+        <Link href={`/chat/${id}`} className={`${darkMode ? 'border-gray-700' : 'border-gray-700 text-gray-900'} chatRow justify-center ${active && 'bg-gray-700/50'}`}>
             <ChatBubbleLeftIcon className="h-5 w-5" />
             <p className="flex-1 md:inline-flex truncate">
                 {text || "New Chat"}

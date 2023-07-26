@@ -1,9 +1,12 @@
 // import MainApp from '@/components/MainApp';
+'use client'
 import ChatApp from '@/components/ChatApp';
+import { useAppContext } from '@/lib/context/AppContext';
 import { SunIcon } from '@heroicons/react/24/outline';
 export default function HomePage() {
+  const {darkMode} = useAppContext();
   return (
-      <div className="text-white flex flex-col items-center justify-center h-screen px-2">
+      <div className={`${darkMode ? 'text-white' : 'text-gray-900'} flex flex-col items-center justify-center h-screen px-2`}>
         <h1 className="text-5xl font-bold mb-20">Content Writer</h1>
         <div>
           <div className='text-center'>

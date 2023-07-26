@@ -26,9 +26,10 @@ export default function Pricing() {
         <h2 className="my-5 text-base font-medium tracking-tight text-indigo-500 uppercase">
           Our Pricing
         </h2>
-        <h3 className="w-full max-w-4xl px-5 mt-2 text-2xl font-black leading-tight text-center text-gray-900 sm:mt-0 sm:px-0 sm:text-6xl md:px-0">
-          Unbelievably powerful but incredibly inexpensive
+        <h3 className="w-full max-w-4xl px-5 mt-2 text-2xl font-black leading-tight text-center text-gray-900 sm:mt-0 sm:px-0 sm:text-5xl md:px-0">
+        Our plans are the perfect combination of <span className="text-indigo-500">quality</span> and <span className="text-indigo-500">affordability</span>!
         </h3>
+        <p className="my-5">You can enjoy all our services with these premium plans.</p>
 
         {!isLoading ? <div className="max-w-full mx-auto md:max-w-6xl sm:px-8">
           <div className="relative flex flex-col items-center sm:flex-row">

@@ -6,6 +6,7 @@ import { Inter } from 'next/font/google'
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 import Login from '@/components/Login';
 import ChatApp from '@/components/ChatApp';
+import { AppProvider } from '@/lib/context/AppContext';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -27,9 +28,11 @@ export default async function RootLayout({
           {!session ? (
             <Login />
           ) : (
-            <ChatApp>
-              {children}
-            </ChatApp>
+            <AppProvider>
+              <ChatApp>
+                {children}
+              </ChatApp>
+            </AppProvider>
           )}
         </SessionProvider>
       </body >

@@ -1,9 +1,9 @@
 export const items = [
-    'Modern language AI is used to create fresh, distinctive content for practically any sector.',
+    'We use the latest art language AI, to create unique, and extraordinary content of almost any type.',
     '20+ usage examples and templates are available for all of your writing requirements.',
-    'Write anything with the appropriate sentiment using 20+ voice tones.',
-    'Choose from more than 30 languages to write for your clients in your own language or another one.',
-    'Uses scientific copywriting techniques, including AIDA & PAS, to produce the highest quality work that requires little to no editing.',
+    'You can write the content in almost all languages for yourself or for your client.',
+    'You can write anything with the right emotion of many tones of voices.',
+    'We use specific patterns to provide unique content which requires no editing.',
 ];
 
 export const images = [
@@ -15,10 +15,10 @@ export const images = [
 ];
 
 export const items2 = [
-    'Write reader-friendly material in the manner that you require it to be written: add additional facts, give it a raw edge, or just correct the language.',
-    'Do you have an issue with that awkward, monotonous sentence? Hit "reword" or "shorten" and observe it transform into something tasteful and concise.',
-    'Never fret about originality of material! Use the built-in plagiarism detector to look for any passages in your work that are identical to any already published content.',
-    'Various formatting choices to enhance text quality and presentability',
+    'It provides reader friendly content in the way which you want! You can get a brief explanation of your topic with perfect grammar.',
+    'If your content has no attraction and looks boring, You just have to put it in the bar and give a single command to “rewrite it” and you can see your piece of content has changed completely.',
+    'Do not worry about the Uniqueness of content! It will get all the information about your topic from the world and write it with its own senses, with no plagiarism.',
+    'You will get actual information, which you can represent on any platform in the world.',
 ];
 
 export const images2 = [

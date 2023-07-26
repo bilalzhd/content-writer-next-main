@@ -7,11 +7,13 @@ import { toast } from "react-hot-toast";
 import useSWR from 'swr';
 import ModelSelection from "./ModelSelection";
 import { PaperAirplaneIcon } from "@heroicons/react/24/solid"
+import { useAppContext } from "@/lib/context/AppContext";
 
 type Props = {
   chatId: string
 }
 function ChatInput({ chatId }: Props) {
+  const {darkMode} = useAppContext();
   const [prompt, setPrompt] = useState("");
   const { data: session } = useSession();
 
@@ -60,7 +62,7 @@ function ChatInput({ chatId }: Props) {
   }
 
   return (
-    <div className="bg-gray-700/50 text-gray-400 rounded-lg text-sm">
+    <div className={`${darkMode ? 'bg-gray-700/50 text-gray-400' : 'bg-gray-200 text-gray-900'}  rounded-lg text-sm`}>
       <form className="px-5 pt-3 pb-3 space-x-5 flex" onSubmit={sendMessage}>
         <textarea value={prompt} style={{ resize: "none"}} className="text-justify focus:outline-none bg-transparent flex-1 disabled:cursor-not-allowed disabled:text-gray-300"
           placeholder="Type your prompt here"
