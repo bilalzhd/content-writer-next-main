@@ -20,9 +20,10 @@ const Login = () => {
               A more effective and speedy approach to write quickly and inexpensively
             </p>
             <a
+            href="#pricing"
               className="relative self-start inline-block w-auto px-8 py-4 mx-auto mt-0 text-base font-bold text-white bg-indigo-600 border-t border-gray-200 rounded-md shadow-xl sm:mt-1 fold-bold lg:mx-0"
             >
-              Let&apos; Write
+              Let&apos;s Write
             </a>
           </div>
           <div className="relative z-40 flex flex-col items-end justify-center w-full h-full lg:w-1/2 ms:pl-10">
