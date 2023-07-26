@@ -27,7 +27,7 @@ const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }: any) => {
         setIsSidebarOpen((prevState: any) => !prevState);
     }
     return (<>
-        <div className="p-2 flex flex-col h-screen border-r border-gray-200">
+        <div className={`p-2 flex flex-col h-screen ${darkMode && 'border-r border-gray-200'}`}>
             <div className="flex-1">
                 <div>
                     <div className="flex flex-row items-center space-x-4 justify-center w-full">
