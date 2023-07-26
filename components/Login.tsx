@@ -46,7 +46,7 @@ const Login = () => {
         <h3 className="w-full px-5 my-3 mt-2 text-xl font-black leading-tight text-center text-gray-900 sm:mt-0 sm:px-0 sm:text-5xl md:px-0">
           Generate mind blowing content <span className='text-indigo-500'>Pro AI Technology</span>.
         </h3>
-        <p className='my-3 py-3 text-center'>Writer's block got you again? Don't worry about it. You can get well-written blogs, email templates, essays, and highly converting copies in popular tones and languages with a single click. You just have to give the query to the content writer and boom!..Your product is ready!</p>
+        <p className='my-3 py-3 text-center'>Writer&apos;s block got you again? Don&apos;t worry about it. You can get well-written blogs, email templates, essays, and highly converting copies in popular tones and languages with a single click. You just have to give the query to the content writer and boom!..Your product is ready!</p>
         <Features items={items2} images={images2} />
       </div>
 
