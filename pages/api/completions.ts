@@ -49,7 +49,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
 
     await batch.commit();
 
-    res.status(200).json({ answer: message.text });
+    res.status(200).json({ answer: message.text as string });
   } catch (err) {
     res.status(504).json({ answer: "An unexpected error occured, try again!" });
   }
