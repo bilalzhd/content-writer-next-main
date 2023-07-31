@@ -32,7 +32,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     const response = await newQuery(prompt, model);
     const message: ServerMessage = {
       tokensUsed: response?.tokensUsed!,
-      text: typeof response?.text === 'string' ? response.text : response?.text?.content || "Content Writer could not write content for that",
+      text: response?.text || "Content Writer could not write content for that",
       createdAt: admin.firestore.Timestamp.now(),
       user: {
         _id: 'Content Writer',

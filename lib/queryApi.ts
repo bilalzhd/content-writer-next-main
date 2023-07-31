@@ -18,7 +18,7 @@ export async function newQuery(prompt: string, model: string) {
         const text = res.data.choices[0].message
         return {
             tokensUsed, 
-            text: text
+            text: text?.content
         }
     } catch (err: any) {
         console.error(err);
