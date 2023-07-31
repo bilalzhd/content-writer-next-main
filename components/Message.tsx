@@ -20,8 +20,8 @@ export default function Message({ message }: Props) {
     // const formattedMessage: string = newlineIndex !== -1 ? message?.text?.substring(newlineIndex + 1) : message?.text;
 
     // const formattedMessage = message.text.replace(/\n(.+)/g, '<br /><br />$1');
-    const newlineIndex = message.text.indexOf('\n');
-    let formattedMessage = message.text;
+    const newlineIndex = message.text.content?.indexOf('\n');
+    let formattedMessage = message.text?.content || message.text;
     if (newlineIndex !== -1) {
         const lines = formattedMessage.split('\n');
         if (lines.length > 1) {

@@ -6,6 +6,7 @@ import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useState, ChangeEvent } from "react";
 import { toast } from "react-hot-toast";
+import { useAppContext } from "@/lib/context/AppContext";
 
 function SidebarRytr({ setResponse, isSidebarOpen, setIsSidebarOpen }: any) {
     const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -86,14 +87,15 @@ function SidebarRytr({ setResponse, isSidebarOpen, setIsSidebarOpen }: any) {
             toast.error("Error occurred while writing!");
         }
     }
+    const {darkMode} = useAppContext()
     return (
         <>
-            {isSidebarOpen && <div className="bg-[#202123] flex-shrink-0 max-w-[350px]">
+            {isSidebarOpen && <div className={`${darkMode ? 'bg-[#202123] text-gray-200' : 'bg-white border border-r border-gray-900 text-gray-900'} flex-shrink-0 max-w-[350px]`}>
                 <div className="p-2 flex flex-col h-screen">
                     <div className="flex-1">
-                        <div>
+                        <div className={`${darkMode ? 'text-gray-200' : ' text-gray-900'}`}>
                             <div className="flex flex-row items-center space-x-4 justify-center w-full">
-                                <Link href="/" className="bg-transparent border border-gray-700 text-gray-200 px-5 py-2 rounded-lg">Chat</Link>
+                                <Link href="/" className="bg-transparent border border-gray-700 px-5 py-2 rounded-lg">Chat</Link>
                                 <div onClick={toggleSidebar} className="flex border-gray-700 border chatRow">
                                     <ArrowLeftOnRectangleIcon className="hidden cursor-pointer w-4 h-4 md:block" />
                                     <Bars3BottomLeftIcon className="md:hidden cursor-pointer w-6 h-6 block" />
@@ -105,7 +107,7 @@ function SidebarRytr({ setResponse, isSidebarOpen, setIsSidebarOpen }: any) {
                                     <div className="flex space-x-2 text-white">
                                         <div className="flex flex-col">
                                             <label htmlFor="language" className="text-center">Select Language</label>
-                                            <select onChange={(e) => setLanguage(e.target.value)} defaultValue="English" className="text-gray-200 bg-gray-600 px-8 py-3 rounded-lg my-3" name="language" id="language">
+                                            <select onChange={(e) => setLanguage(e.target.value)} defaultValue="English" className=" bg-gray-600 px-8 py-3 rounded-lg my-3" name="language" id="language">
                                                 <option value="Arabic">Arabic</option>
                                                 <option value="Bulgarian">Bulgarian</option>
                                                 <option value="Chinese">Chinese</option>
@@ -115,7 +117,7 @@ function SidebarRytr({ setResponse, isSidebarOpen, setIsSidebarOpen }: any) {
                                         </div>
                                         <div className="flex flex-col">
                                             <label htmlFor="tone" className="text-center">Select Tone</label>
-                                            <select className="text-gray-200 bg-gray-600 px-8 py-3 rounded-lg my-3" name="tone" id="tone">
+                                            <select className=" bg-gray-600 px-8 py-3 rounded-lg my-3" name="tone" id="tone">
                                                 <option value="Convincing">Convincing</option>
                                                 <option value="Humble">Humble</option>
                                                 <option value="Thoughtful">Thoughtful</option>
@@ -125,8 +127,8 @@ function SidebarRytr({ setResponse, isSidebarOpen, setIsSidebarOpen }: any) {
                                         </div>
                                     </div>
                                     <div className="flex flex-col">
-                                        <label htmlFor="use_case" className="text-gray-200">Choose Use Case</label>
-                                        <select value={selectedOption} onChange={handleChange} id="use_case" className="text-gray-200 bg-gray-600 px-8 py-3 rounded-lg my-3 cursor-pointer">
+                                        <label htmlFor="use_case" className="">Choose Use Case</label>
+                                        <select value={selectedOption} onChange={handleChange} id="use_case" className=" bg-gray-600 px-8 py-3 rounded-lg my-3 cursor-pointer">
                                             <option value="blog">Blog Outline</option>
                                             <option value="brand">Brand Name</option>
                                             <option value="business">Business Idea Pitch</option>
@@ -138,7 +140,7 @@ function SidebarRytr({ setResponse, isSidebarOpen, setIsSidebarOpen }: any) {
                                             <option value="video">Video Idea</option>
                                         </select>
                                     </div>
-                                    <label htmlFor="input" className="my-3 text-gray-200">{label}</label>
+                                    <label htmlFor="input" className="my-3 ">{label}</label>
                                     <textarea value={userInput} onChange={(event) => setUserInput(event.target.value)} id="input" className={`w-full rounded-lg ${!resize && 'resize-none'} px-3 py-2 bg-gray-600 border border-gray-700`} placeholder={placeholder} rows={resizeTextarea}></textarea>
                                 </div>
                                 <button onClick={handleWriteFormSubmission} className="bg-gray-200 px-4 py-2 rounded-lg">

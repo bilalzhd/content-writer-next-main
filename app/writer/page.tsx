@@ -1,14 +1,16 @@
 "use client"
 import ResponseArea from "@/components/ResponseArea";
 import SidebarRytr from "@/components/SidebarRytr";
+import { useAppContext } from "@/lib/context/AppContext";
 import { useState } from "react";
 function WriterPage() {
   const [ response, setIsResponse ] = useState("");
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const {darkMode} = useAppContext();
   return (
     <div className='flex flex-row max-h-screen overflow-hidden'>
         <SidebarRytr isSidebarOpen={isSidebarOpen} setIsSidebarOpen={setIsSidebarOpen} setResponse={setIsResponse} />
-        <div className="bg-[#343541] flex-1 overflow-auto h-screen">
+        <div className={`${darkMode ? 'bg-[#343541]' : 'bg-white'} flex-1 overflow-auto h-screen`}>
           <ResponseArea isSidebarOpen={isSidebarOpen} setIsSidebarOpen={setIsSidebarOpen} response={response}  />
         </div>
     </div>

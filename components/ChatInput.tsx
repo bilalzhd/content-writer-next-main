@@ -18,7 +18,7 @@ function ChatInput({ chatId }: Props) {
   const { data: session } = useSession();
 
 
-  const model = "text-davinci-003";
+  const model = "gpt-3.5-turbo";
 
   const sendMessage = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();

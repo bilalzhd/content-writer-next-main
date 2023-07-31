@@ -8,12 +8,15 @@ import React from 'react';
 const PricingCard: React.FC<PricingCardProps> = ({ price }) => {
 
     async function handleSubscription() {
-        const {data : {id}} = await axios.post('/api/checkout_sessions', {
+        const { data } = await axios.post('/api/payment', {
             price: price.id 
+        }, {
+            headers: {
+                "Content-Type": "application/json",
+            }
         });
 
-        const stripe = await getStripe();
-        await stripe.redirectToCheckout({sessionId: id})
+        window.location.assign(data)
     }
     function dynamicSubtitle(price: Price) {
         if (price.nickname === "Premium Plan") {
