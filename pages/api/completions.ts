@@ -2,9 +2,10 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { newQuery } from "@/lib/queryApi";
 import admin from 'firebase-admin';
 import adminDb from "@/firebaseAdmin";
+import { ChatCompletionResponseMessage } from "openai";
 
 type Data = {
-  answer: string;
+  answer: string | ChatCompletionResponseMessage;
 };
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
@@ -49,7 +50,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
 
     await batch.commit();
 
-    res.status(200).json({ answer: message.text as string });
+    res.status(200).json({ answer: message.text });
   } catch (err) {
     res.status(504).json({ answer: "An unexpected error occured, try again!" });
   }
