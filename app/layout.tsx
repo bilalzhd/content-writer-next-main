@@ -8,6 +8,7 @@ import Login from '@/components/Login';
 import ChatApp from '@/components/ChatApp';
 import { AppProvider } from '@/lib/context/AppContext';
 import Head from 'next/head';
+import Script from 'next/script';
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
@@ -23,17 +24,16 @@ export default async function RootLayout({
   const session = await getServerSession(authOptions);
   return (
     <html lang="en">
-      <Head>
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-6MN9ZSCP4V"></script>
-        <script dangerouslySetInnerHTML={{
-          __html: `window.dataLayer = window.dataLayer || [];
+      <Script async src="https://www.googletagmanager.com/gtag/js?id=G-6MN9ZSCP4V" />
+      <Script id='google-analytics'>
+        {`
+          window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
 
-          gtag('config', 'G-6MN9ZSCP4V');`
-        }}>
-        </script>
-      </Head>
+          gtag('config', 'G-6MN9ZSCP4V');
+        `}
+      </Script>
       <body className={inter.className}>
         <SessionProvider session={session}>
           {!session ? (
