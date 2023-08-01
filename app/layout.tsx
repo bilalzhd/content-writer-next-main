@@ -24,6 +24,9 @@ export default async function RootLayout({
   const session = await getServerSession(authOptions);
   return (
     <html lang="en">
+      <Head>
+        <meta name="google-site-verification" content="wiu49TiBgsqqBb7486fTCMu-2LJVC9b_rm_DnvoBWT0" />
+      </Head>
       <Script async src="https://www.googletagmanager.com/gtag/js?id=G-6MN9ZSCP4V" />
       <Script id='google-analytics'>
         {`
