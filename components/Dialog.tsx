@@ -65,7 +65,7 @@ function Dialog({ title, setIsDialogOpen }: Props) {
                             const extractedSubstring = product.nickname.substring(0, spaceIndex);
                             if (isLoading) return <Loader />;
                             else {
-                                return (<div className="md:w-1/3 !mt-0 border-r border-r-gray-700 w-full flex flex-col space-y-2 justify-center px-4">
+                                return (<div key={product.id} className="md:w-1/3 !mt-0 border-r border-r-gray-700 w-full flex flex-col space-y-2 justify-center px-4">
                                     <h3 className="text-xl font-bold dark:text-gray-100">{product.nickname}</h3>
                                     <button onClick={() => handleSubscription(product)} className="disabled:opacity-50 rounded disabled:cursor-not-allowed btn relative btn-primary border-none bg-gray-600 hover:bg-gray-400 py-3 font-semibold text-gray-900 dark:bg-gray-500 dark:opacity-100">Upgrade to {extractedSubstring}</button>
                                     <span className="text-gray-100">{(product.unit_amount / 100).toLocaleString('en-US', {
