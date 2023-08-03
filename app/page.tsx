@@ -1,6 +1,5 @@
 // import MainApp from '@/components/MainApp';
 'use client'
-import ChatApp from '@/components/ChatApp';
 import { useAppContext } from '@/lib/context/AppContext';
 import { SunIcon } from '@heroicons/react/24/outline';
 export default function HomePage() {

@@ -1,22 +1,15 @@
-import getStripe from '@/lib/stripe';
+'use client'
 import { CheckCircleIcon, XCircleIcon } from '@heroicons/react/24/outline';
 import axios from 'axios'
-// import { useSession } from 'next-auth/react';
-import React from 'react';
+import LoginModal from './LoginModal';
+import React, { useState } from 'react';
 
 
 const PricingCard: React.FC<PricingCardProps> = ({ price }) => {
+    const [ isLoginModalOpen, setIsLoginModalOpen ] = useState(false);
 
     async function handleSubscription() {
-        const { data } = await axios.post('/api/payment', {
-            price: price.id 
-        }, {
-            headers: {
-                "Content-Type": "application/json",
-            }
-        });
-
-        window.location.assign(data)
+        setIsLoginModalOpen(!isLoginModalOpen);
     }
     function dynamicSubtitle(price: Price) {
         if (price.nickname === "Premium Plan") {
@@ -70,6 +63,7 @@ const PricingCard: React.FC<PricingCardProps> = ({ price }) => {
                     </button>
                 </div>
             </div>
+            <LoginModal isLoginModalOpen={isLoginModalOpen} setIsLoginModalOpen={setIsLoginModalOpen} />
         </div>
     )
 }

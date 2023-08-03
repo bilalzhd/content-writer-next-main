@@ -1,11 +1,36 @@
-import { Dispatch, SetStateAction } from "react"
+'use client'
+import { CheckCircleIcon, XCircleIcon } from "@heroicons/react/24/outline";
+import axios from "axios";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
+import Loader from "./Loader";
 type Props = {
     title: string | null;
-    children?: React.ReactNode | null
     setIsDialogOpen: Dispatch<SetStateAction<boolean>>;
 }
-function Dialog({children, title, setIsDialogOpen}: Props) {
-    
+function Dialog({ title, setIsDialogOpen }: Props) {
+    const { data: session } = useSession();
+    console.log(session?.user?.email)
+    async function handleSubscription(price: Price) {
+        const { data } = await axios.post('/api/payment',
+            { price: price.id, userSession: session, userEmail: session?.user?.email },
+            { headers: { "Content-Type": "application/json", } }
+        );
+
+        window.location.assign(data)
+    }
+    const [products, setProducts] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+    const getProducts = async () => {
+        setIsLoading(true)
+        const response = await fetch('/api/products/getproducts');
+        const data = await response.json();
+        setIsLoading(false);
+        setProducts(data)
+    }
+    useEffect(() => {
+        getProducts();
+    }, [])
     return (
         <div id="defaultModal" tabIndex={-1} aria-hidden="true" className="md:top-16 md:left-80 fixed top-0 left-0 z-100 w-full p-4 overflow-x-hidden overflow-y-auto h-[calc(100%-1rem)] max-h-full">
             <div className="relative w-full max-w-2xl max-h-full">
@@ -19,7 +44,43 @@ function Dialog({children, title, setIsDialogOpen}: Props) {
                             <span className="sr-only">Close modal</span>
                         </button>
                     </div>
-                    {children}
+                    <div className="flex md:flex-row space-y-4 flex-col py-6">
+                        <div className="md:w-1/3 w-full border-r border-r-gray-700 flex flex-col space-y-2 justify-center px-4">
+                            <h3 className="text-xl font-bold dark:text-gray-100">Free Plan</h3>
+                            <button className="disabled:opacity-50 rounded disabled:cursor-not-allowed btn relative btn-primary border-none bg-gray-600 py-3 font-semibold text-gray-900 dark:bg-gray-500 dark:opacity-100" disabled>Your Current Plan</button>
+                            <span className="text-gray-100">Free</span>
+                            <ul className="pt-2">
+                                <li className="text-gray-100 flex md:justify-center sm:mb-2"><CheckCircleIcon className="mx-2 text-green-600 w-8 h-8" />10,000 words per month</li>
+                                <li className="text-gray-100 flex md:justify-center"><CheckCircleIcon className="mx-2 text-red-600 w-8 h-8 flex-shrink" />Recaptcha on every request</li>
+                            </ul>
+                        </div>
+                        {products && products.map((product: Price) => {
+                            function dynamicSubtitle(price: Price) {
+                                if (price.nickname === "Premium Plan") {
+                                    return "100 thousand"
+                                }
+                                return "50 thousand"
+                            }
+                            const spaceIndex = product.nickname.indexOf(" ");
+                            const extractedSubstring = product.nickname.substring(0, spaceIndex);
+                            if (isLoading) return <Loader />;
+                            else {
+                                return (<div className="md:w-1/3 !mt-0 border-r border-r-gray-700 w-full flex flex-col space-y-2 justify-center px-4">
+                                    <h3 className="text-xl font-bold dark:text-gray-100">{product.nickname}</h3>
+                                    <button onClick={() => handleSubscription(product)} className="disabled:opacity-50 rounded disabled:cursor-not-allowed btn relative btn-primary border-none bg-gray-600 hover:bg-gray-400 py-3 font-semibold text-gray-900 dark:bg-gray-500 dark:opacity-100">Upgrade to {extractedSubstring}</button>
+                                    <span className="text-gray-100">{(product.unit_amount / 100).toLocaleString('en-US', {
+                                        style: 'currency',
+                                        currency: 'USD'
+                                    })}
+                                    </span>
+                                    <ul className="pt-2">
+                                        <li className="text-gray-100 flex md:justify-center sm:mb-2"><CheckCircleIcon className="mx-2 text-green-600 w-8 h-8" />{dynamicSubtitle(product)} words per month</li>
+                                        <li className="text-gray-100 flex md:justify-center"><XCircleIcon className="mx-2 text-red-600 w-8 h-8 flex-shrink" />Recaptcha on every request</li>
+                                    </ul>
+                                </div>)
+                            }
+                        })}
+                    </div>
                 </div>
             </div>
         </div>
