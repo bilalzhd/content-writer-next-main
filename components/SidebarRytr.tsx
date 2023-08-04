@@ -143,7 +143,7 @@ function SidebarRytr({ setResponse, isSidebarOpen, setIsSidebarOpen }: any) {
                                     <label htmlFor="input" className="my-3 ">{label}</label>
                                     <textarea value={userInput} onChange={(event) => setUserInput(event.target.value)} id="input" className={`w-full rounded-lg ${!resize && 'resize-none'} px-3 py-2 bg-gray-600 border border-gray-700`} placeholder={placeholder} rows={resizeTextarea}></textarea>
                                 </div>
-                                <button onClick={handleWriteFormSubmission} className="bg-gray-200 px-4 py-2 rounded-lg">
+                                <button onClick={handleWriteFormSubmission} className="bg-gray-200 px-4 py-2 rounded-lg text-gray-900">
                                     {!isLoading ? 'Write For Me' : 'Writing..'}
                                 </button>
                             </div>

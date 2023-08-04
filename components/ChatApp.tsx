@@ -27,6 +27,7 @@ function ChatApp({ children }: Props) {
             </div>
             <ClientProvider />
             <div className={`${darkMode ? 'bg-[#343541]' : 'bg-white'} flex-1`}>{children}</div>
+            <div id="ad" className={`${darkMode ? 'bg-[#343541]' : 'bg-white'} flex-shrink w-0 md:w-40`}></div>
         </div>
     )
 }

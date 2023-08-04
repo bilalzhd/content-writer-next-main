@@ -4,6 +4,7 @@ import Pricing from './Pricing';
 import Footer from './Footer';
 import Features from './Features';
 import { images, images2, items, items2 } from '@/lib/listItemsData';
+import Image from 'next/image';
 
 
 const Login = () => {
@@ -28,10 +29,11 @@ const Login = () => {
           </div>
           <div className="relative z-40 flex flex-col items-end justify-center w-full h-full lg:w-1/2 ms:pl-10">
             <div className="container relative left-0 w-full max-w-4xl lg:absolute xl:max-w-6xl lg:w-screen">
-              <img
+              {/* <img
                 src="https://cdn.devdojo.com/images/september2020/macbook-mockup.png"
                 className="w-full h-auto mt-20 mb-20 ml-0 lg:mt-24 xl:mt-40 lg:mb-0 lg:h-full lg:-ml-12"
-              />
+              /> */}
+              <Image src="/mockup.jpg" width={2000} height={1201} alt='Content Writing' />
             </div>
           </div>
         </div>
