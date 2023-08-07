@@ -1,16 +1,14 @@
 'use client'
-import Header from './Header';
 import Pricing from './Pricing';
-import Footer from './Footer';
 import Features from './Features';
 import { images, images2, items, items2 } from '@/lib/listItemsData';
 import Image from 'next/image';
 
 
 const Login = () => {
+
   return (
     <>
-      <Header />
       <div className="relative items-center justify-center w-full overflow-x-hidden lg:pt-40 lg:pb-40 xl:pt-40 xl:pb-64">
         <div className="container flex flex-col items-center justify-between h-full max-w-6xl px-8 mx-auto -mt-32 lg:flex-row xl:px-0">
           <div className="z-30 flex flex-col items-center w-full max-w-xl pt-48 text-center lg:items-start lg:w-1/2 lg:pt-20 xl:pt-40 lg:text-left">
@@ -378,9 +376,7 @@ const Login = () => {
 
       <Pricing />
 
-      {/* FOOTER */}
 
-      <Footer />
     </>
   )
 }

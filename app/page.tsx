@@ -1,11 +1,15 @@
 // import MainApp from '@/components/MainApp';
 'use client'
+import Login from '@/components/Login';
 import { useAppContext } from '@/lib/context/AppContext';
 import { SunIcon } from '@heroicons/react/24/outline';
+import { useSession } from 'next-auth/react';
 export default function HomePage() {
-  const {darkMode} = useAppContext();
+  const { darkMode } = useAppContext();
+  const { data: session } = useSession();
   return (
-      <div className={`${darkMode ? 'text-white' : 'text-gray-900'} flex flex-col items-center justify-center h-screen px-2`}>
+    <>
+      {session ? (<div className={`${darkMode ? 'text-white' : 'text-gray-900'} flex flex-col items-center justify-center h-screen px-2`}>
         <h1 className="text-5xl font-bold mb-20">Content Writer</h1>
         <div>
           <div className='text-center'>
@@ -20,6 +24,9 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-      </div>
+      </div>) : <Login />
+      }
+
+    </>
   )
 }

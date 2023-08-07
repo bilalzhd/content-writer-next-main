@@ -9,6 +9,8 @@ import ChatApp from '@/components/ChatApp';
 import { AppProvider } from '@/lib/context/AppContext';
 import Head from 'next/head';
 import Script from 'next/script';
+import Footer from '@/components/Footer';
+import Header from '@/components/Header';
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
@@ -24,9 +26,6 @@ export default async function RootLayout({
   const session = await getServerSession(authOptions);
   return (
     <html lang="en">
-      <Head>
-        <meta name="google-site-verification" content="wiu49TiBgsqqBb7486fTCMu-2LJVC9b_rm_DnvoBWT0" />
-      </Head>
       <Script async src="https://www.googletagmanager.com/gtag/js?id=G-6MN9ZSCP4V" />
       <Script id='google-analytics'>
         {`
@@ -40,7 +39,11 @@ export default async function RootLayout({
       <body className={inter.className}>
         <SessionProvider session={session}>
           {!session ? (
-            <Login />
+            <>
+              <Header />
+              {children}
+              <Footer />
+            </>
           ) : (
             <AppProvider>
               <ChatApp>
