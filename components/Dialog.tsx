@@ -10,7 +10,7 @@ type Props = {
 }
 function Dialog({ title, setIsDialogOpen }: Props) {
     const { data: session } = useSession();
-    console.log(session?.user?.email)
+    
     async function handleSubscription(price: Price) {
         const { data } = await axios.post('/api/payment',
             { price: price.id, userSession: session, userEmail: session?.user?.email },

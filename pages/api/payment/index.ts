@@ -12,27 +12,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     })
     try {
         const { price, userSession, userEmail } = req.body;
-        console.log("User Email:", userEmail);
-        const userRef = adminDb.collection("users").doc(userEmail);
-        console.log("User Reference:", userRef.path);
-
-        // const userSnapshot = await userRef.get();
-        // const userData = userSnapshot.data();
-        // const email = userEmail;
+        
 
         if (!userEmail) { throw new Error("No email in the firestore") }
-        // const customer = await stripe.customers.create({
-        //     email: userEmail,
-        // });
-
-        // const subscription = await stripe.subscriptions.create({
-        //     customer: customer.id,
-        //     items: [{ price }],
-        // });
-
-        // await userRef.update({ stripeCustomerId: customer.id });
-
-        
 
         const session = await stripe.checkout.sessions.create({
             mode: 'subscription',

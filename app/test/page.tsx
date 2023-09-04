@@ -4,7 +4,7 @@ import { useEffect } from "react";
 
 function Test() {
     const { data: userSession } = useSession();
-    console.log(userSession?.user?.email)
+    // console.log(userSession?.user?.email)
     useEffect(() => {
         async function test() {
             const response = await fetch("/api/test", {
@@ -15,7 +15,8 @@ function Test() {
                 body: JSON.stringify({ email: userSession?.user?.email }),
             });
             const data = await response.json();
-            console.log(data); // You should see the email in the console
+            // console.log(data); 
+            // You should see the email in the console
         }
         test();
     }, [])
